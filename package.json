@@ -39,6 +39,7 @@
     "@aspida/swr": "^1.11.0",
     "@prisma/client": "^4.6.1",
     "axios": "^0.27.2",
+    "firebase": "^9.17.1",
     "next": "^13.0.4",
     "pathpida": "^0.19.3",
     "prisma": "^4.6.1",
