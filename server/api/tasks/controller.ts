@@ -11,6 +11,6 @@ export default defineController({ getTasks, print }, ({ getTasks, print }) => ({
   },
   post: async ({ body }) => ({
     status: 201,
-    body: await createTask(body.label)
-  })
+    body: await createTask(body.label),
+  }),
 }))

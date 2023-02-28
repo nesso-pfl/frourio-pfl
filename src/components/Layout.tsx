@@ -18,12 +18,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img
-            src={staticPath.vercel_svg}
-            alt="Vercel Logo"
-            className={styles.logo}
-          />
+          Powered by <img src={staticPath.vercel_svg} alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
     </div>

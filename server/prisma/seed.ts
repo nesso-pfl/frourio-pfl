@@ -7,8 +7,8 @@ async function main() {
     update: {},
     create: {
       label: 'task1',
-      done: true
-    }
+      done: true,
+    },
   })
 
   const task2 = await prisma.task.upsert({
@@ -16,8 +16,8 @@ async function main() {
     update: {},
     create: {
       label: 'task2',
-      done: false
-    }
+      done: false,
+    },
   })
 
   console.log({ task1, task2 })

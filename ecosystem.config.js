@@ -8,7 +8,7 @@ module.exports = {
       wait_ready: true,
       listen_timeout: 10000,
       env: {
-        NODE_ENV: 'development'
+        NODE_ENV: 'development',
       },
       env_production: {
         NODE_ENV: 'production',
@@ -19,8 +19,8 @@ module.exports = {
         API_ORIGIN: process.env.API_ORIGIN,
         API_BASE_PATH: process.env.API_BASE_PATH,
         API_SERVER_PORT: process.env.API_SERVER_PORT,
-        API_UPLOAD_DIR: process.env.API_UPLOAD_DIR
-      }
-    }
-  ]
+        API_UPLOAD_DIR: process.env.API_UPLOAD_DIR,
+      },
+    },
+  ],
 }

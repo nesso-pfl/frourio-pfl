@@ -9,5 +9,5 @@ export default defineController(() => ({
   delete: async ({ params }) => {
     await deleteTask(params.taskId)
     return { status: 204 }
-  }
+  },
 }))

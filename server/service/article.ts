@@ -8,23 +8,23 @@ const articleData: ArticleInfo[] = [
   {
     id: 1,
     title: 'First article',
-    body: 'Hello from frourio!'
+    body: 'Hello from frourio!',
   },
   {
     id: 2,
     title: 'Create Frourio App',
-    body: 'From installation\n         To deployment\n\n   In  One  Command'
+    body: 'From installation\n         To deployment\n\n   In  One  Command',
   },
   {
     id: 3,
     title: 'TypeScript full stack framework',
-    body: 'All you need is TypeScript'
+    body: 'All you need is TypeScript',
   },
   {
     id: 4,
     title: 'What databases are suported?',
-    body: '- SQLite (prisma only for now)\n- PostgreSQL\n- MySQL\nPlanning to support others... stay tuned!'
-  }
+    body: '- SQLite (prisma only for now)\n- PostgreSQL\n- MySQL\nPlanning to support others... stay tuned!',
+  },
 ]
 
 export const getArticles = (search?: string) => {
@@ -35,12 +35,8 @@ export const getArticles = (search?: string) => {
         .toLowerCase()
         .split(/\s+/)
         .every(
-          (word) =>
-            (article.title + article.body)
-              .replace(/\s/g, '')
-              .toLowerCase()
-              .search(word.toLowerCase()) >= 0
-        )
+          (word) => (article.title + article.body).replace(/\s/g, '').toLowerCase().search(word.toLowerCase()) >= 0,
+        ),
   )
   return filtered
 }

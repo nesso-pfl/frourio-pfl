@@ -17,7 +17,7 @@ const ArticleList: NextPage = () => {
   const query = router.query as Partial<OptionalQuery>
   const search = query.search ? query.search.trim() : ''
   const { data: articleList } = useAspidaSWR(apiClient.article, {
-    query: { search }
+    query: { search },
   })
   return (
     <Layout>
@@ -38,7 +38,7 @@ const ArticleList: NextPage = () => {
                 <li key={article.id}>
                   <Link
                     href={pagesPath.article.entry.$url({
-                      query: { id: article.id }
+                      query: { id: article.id },
                     })}
                   >
                     {article.title}

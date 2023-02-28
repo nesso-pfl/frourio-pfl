@@ -8,5 +8,5 @@ module.exports = {
   target: 'node16',
   bundle: true,
   plugins: [nodeExternalsPlugin()],
-  logLevel: 'info'
+  logLevel: 'info',
 }

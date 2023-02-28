@@ -11,10 +11,7 @@ import type { NextPage } from 'next'
 const Home: NextPage = () => {
   const { data: tasks, error, mutate } = useAspidaSWR(apiClient.tasks)
   const [label, setLabel] = useState('')
-  const inputLabel = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setLabel(e.target.value),
-    []
-  )
+  const inputLabel = useCallback((e: ChangeEvent<HTMLInputElement>) => setLabel(e.target.value), [])
 
   const createTask = useCallback(
     async (e: FormEvent) => {
@@ -25,7 +22,7 @@ const Home: NextPage = () => {
       setLabel('')
       mutate()
     },
-    [label]
+    [label],
   )
 
   const toggleDone = useCallback(async (task: Task) => {
@@ -62,19 +59,10 @@ const Home: NextPage = () => {
           {tasks.map((task) => (
             <li key={task.id}>
               <label>
-                <input
-                  type="checkbox"
-                  checked={task.done}
-                  onChange={() => toggleDone(task)}
-                />
+                <input type="checkbox" checked={task.done} onChange={() => toggleDone(task)} />
                 <span>{task.label}</span>
               </label>
-              <input
-                type="button"
-                value="DELETE"
-                style={{ float: 'right' }}
-                onClick={() => deleteTask(task)}
-              />
+              <input type="button" value="DELETE" style={{ float: 'right' }} onClick={() => deleteTask(task)} />
             </li>
           ))}
         </ul>

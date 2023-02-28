@@ -12,9 +12,7 @@ export type Query = {
 const Article: NextPage = () => {
   const router = useRouter()
 
-  const { data: article } = useAspidaSWR(
-    apiClient.article._articleId(Number.parseInt(router.query.id as string, 10))
-  )
+  const { data: article } = useAspidaSWR(apiClient.article._articleId(Number.parseInt(router.query.id as string, 10)))
   return (
     <Layout>
       <Head>

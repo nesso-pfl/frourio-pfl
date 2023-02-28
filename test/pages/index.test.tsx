@@ -10,9 +10,7 @@ dotenv.config({ path: 'server/.env' })
 jest.mock('next/router', () => require('next-router-mock'))
 
 const apiClient = api(aspida(undefined, { baseURL: process.env.API_BASE_PATH }))
-const res = function <T extends () => unknown>(
-  data: ReturnType<T> extends Promise<infer S> ? S : never
-) {
+const res = function <T extends () => unknown>(data: ReturnType<T> extends Promise<infer S> ? S : never) {
   return data
 }
 
@@ -25,8 +23,8 @@ beforeAll(() => {
     reply.send(
       res<typeof apiClient.tasks.$get>([
         { id: 1, label: 'foo task', done: false },
-        { id: 2, label: 'bar task', done: true }
-      ])
+        { id: 2, label: 'bar task', done: true },
+      ]),
     )
   })
 
@@ -43,7 +41,7 @@ describe('Home page', () => {
       async () => {
         await findByText('foo task')
       },
-      { timeout: 5000 }
+      { timeout: 5000 },
     )
     expect(await findByText('foo task')).toBeTruthy()
     expect(await findByText('bar task')).toBeTruthy()
@@ -59,12 +57,10 @@ describe('Home page', () => {
       async () => {
         await findByText('LOGIN')
       },
-      { timeout: 5000 }
+      { timeout: 5000 },
     )
     fireEvent.click(await findByText('LOGIN'))
-    expect(window.prompt).toHaveBeenCalledWith(
-      'Enter the user id (See server/.env)'
-    )
+    expect(window.prompt).toHaveBeenCalledWith('Enter the user id (See server/.env)')
     expect(window.alert).toHaveBeenCalledWith('Login failed')
   })
 })
