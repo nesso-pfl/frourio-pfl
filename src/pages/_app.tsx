@@ -1,7 +1,9 @@
 import '~/styles/globals.css'
+import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { staticPath } from '~/utils/$path'
+import { chakraTheme } from '~/features/ui'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -9,7 +11,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="icon" href={staticPath.favicon_png} />
       </Head>
-      <Component {...pageProps} />
+      <ChakraProvider theme={chakraTheme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   )
 }
