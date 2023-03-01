@@ -4,12 +4,16 @@ import type { NextPage } from 'next'
 import { RegisterForm, useCreateAccount } from '~/features/account'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 import { pagesPath } from '@/src/utils/$path'
+import Head from 'next/head'
 
 const Register: NextPage = () => {
   const { createAccount } = useCreateAccount()
 
   return (
     <Layout>
+      <Head>
+        <title>アカウント登録 | Frourio Pfl</title>
+      </Head>
       <Container pt={32} centerContent>
         <Heading variant="pageTitle">Frourio Pfl にようこそ！</Heading>
         <Card.Container>
