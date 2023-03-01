@@ -9,8 +9,8 @@ import { useCallback } from 'react'
 const formSchema = z
   .object({
     email: z.string().min(1, errorMessage.required).email(errorMessage.email),
-    password: z.string().min(1, errorMessage.required),
-    passwordConfirm: z.string().min(1, errorMessage.required),
+    password: z.string().min(1, errorMessage.required).min(6, errorMessage.password),
+    passwordConfirm: z.string().min(1, errorMessage.required).min(6, errorMessage.password),
   })
   .refine(({ password, passwordConfirm }) => password === passwordConfirm, {
     message: '入力されたパスワードと一致しません',
