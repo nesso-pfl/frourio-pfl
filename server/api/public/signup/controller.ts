@@ -1,19 +1,24 @@
-import { createAccount, deleteAccount } from '$/service/account'
-import { createUser } from '$/service/user'
+import { createAccount, CreateAccountError, deleteAccount } from '$/service/account'
+import { createUser, CreateUserError } from '$/service/user'
 import { defineController } from './$relay'
 
 export default defineController(
   { createAccount, createUser, deleteAccount },
   ({ createAccount, createUser, deleteAccount }) => ({
     post: async ({ body }) => {
-      const account = await createAccount(body)
       try {
-        await createUser(account)
-
-        return { status: 201, body: account }
+        const account = await createAccount(body)
+        try {
+          await createUser(account)
+          return { status: 201, body: account }
+        } catch (error) {
+          if (!(error instanceof CreateUserError)) throw error
+          await deleteAccount(account)
+          throw error
+        }
       } catch (error) {
-        await deleteAccount(account)
-        return { status: 500, body: { code: 'create-user-error' } }
+        if (!(error instanceof CreateAccountError)) throw error
+        return { status: 400, body: { code: error.code } }
       }
     },
   }),

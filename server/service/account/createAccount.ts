@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { Account, CreateAccount } from '$/types'
 import { CreateAccountErrorCode, createAccountErrorCodes } from '$/types/account'
 
-class CreateAccountError extends Error {
+export class CreateAccountError extends Error {
   code: string
   constructor(code: CreateAccountErrorCode) {
     super()
