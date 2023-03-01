@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { errorMessage } from '~/features/form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Form, Input } from '~/features/ui'
+import { useCallback } from 'react'
 
 const formSchema = z
   .object({
@@ -18,17 +19,25 @@ const formSchema = z
 export type Form = z.infer<typeof formSchema>
 
 type Props = {
-  onSubmit: (formValues: Form) => Promise<unknown>
+  onSubmit: (formValues: Form) => Promise<{ field: keyof Form; message: string } | undefined>
 }
 
 export const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
   const {
     register,
     formState: { errors },
+    setError,
     handleSubmit,
   } = useForm<Form>({ resolver: zodResolver(formSchema) })
+  const onSubmit_ = useCallback(async (formValues: Form) => {
+    const error = await onSubmit(formValues)
+    if (error) {
+      setError(error.field, { message: error.message })
+    }
+  }, [])
+
   return (
-    <Form.Container onSubmit={handleSubmit(onSubmit)} minW="300px">
+    <Form.Container onSubmit={handleSubmit(onSubmit_)} minW="300px">
       <VStack spacing={5} mb={12}>
         <Form.Item isInvalid={!!errors.email?.message}>
           <Form.Label fontSize="sm">メールアドレス</Form.Label>
