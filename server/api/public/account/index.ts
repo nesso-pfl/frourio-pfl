@@ -1,4 +1,4 @@
-import { Account, CreateAccount } from '$/service/account'
+import { Account, CreateAccount } from '$/types'
 
 export type Methods = {
   post: {

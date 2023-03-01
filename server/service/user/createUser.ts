@@ -1,10 +1,6 @@
 import { depend } from 'velona'
 import { prisma } from '$/lib/prisma'
-import { User } from './types'
-
-type CreateUser = {
-  firebaseUid: string
-}
+import { CreateUser, User } from '$/types'
 
 const create = async ({ firebaseUid }: CreateUser) => {
   return await prisma.user.create({ data: { firebaseUid } })

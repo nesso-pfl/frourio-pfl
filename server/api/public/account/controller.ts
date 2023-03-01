@@ -8,11 +8,11 @@ export default defineController(
     post: async ({ body }) => {
       const account = await createAccount(body)
       try {
-        await createUser({ firebaseUid: account.uid })
+        await createUser(account)
 
         return { status: 201, body: account }
       } catch (error) {
-        await deleteAccount({ firebaseUid: account.uid })
+        await deleteAccount(account)
         return { status: 500, body: { code: 'create-user-error' } }
       }
     },

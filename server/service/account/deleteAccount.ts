@@ -1,9 +1,6 @@
 import { depend } from 'velona'
 import { deleteFirebaseUser } from '$/lib/firebase'
-
-type DeleteAccount = {
-  firebaseUid: string
-}
+import { DeleteAccount } from '$/types/account'
 
 const delete_ = async ({ firebaseUid }: DeleteAccount) => {
   return deleteFirebaseUser(firebaseUid)
