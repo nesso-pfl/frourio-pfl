@@ -56,7 +56,7 @@ export const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
         </Form.Item>
       </VStack>
       <Button type="submit" size="md" w="100%">
-        アカウント作成
+        アカウント登録
       </Button>
     </Form.Container>
   )

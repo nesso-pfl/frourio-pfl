@@ -40,11 +40,11 @@ beforeAll(() => {
 afterAll(() => fastify.close())
 
 describe('/register', () => {
-  test('アカウントが作成できる', async () => {
+  test('アカウントが登録できる', async () => {
     const { container, findByText } = render(<Register />)
     await submitForm(container, validInput)
 
-    expect(await findByText('アカウントを作成しました。')).toBeInTheDocument()
+    expect(await findByText('アカウントを登録しました。')).toBeInTheDocument()
     expect(mockRouter).toMatchObject({ asPath: pagesPath.login.$url().pathname })
   })
 })

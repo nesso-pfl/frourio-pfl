@@ -19,7 +19,7 @@ export const useCreateAccount = () => {
       try {
         await apiClient.public.signup.$post({ body })
         await router.push(pagesPath.login.$url())
-        successToast({ description: 'アカウントを作成しました。' })
+        successToast({ description: 'アカウントを登録しました。' })
       } catch (error) {
         const result = errorSchema.safeParse(error)
         if (result.success) {
@@ -30,7 +30,7 @@ export const useCreateAccount = () => {
               return { field: 'email', message: 'このメールアドレスは既に使われています' } as const
           }
         } else {
-          errorToast({ description: 'アカウントの作成に失敗しました。しばらく待ってからもう一度お試しください。' })
+          errorToast({ description: 'アカウントの登録に失敗しました。しばらく待ってからもう一度お試しください。' })
         }
       }
     },

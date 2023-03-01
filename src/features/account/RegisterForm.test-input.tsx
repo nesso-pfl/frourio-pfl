@@ -14,5 +14,5 @@ export const submitForm = async (container: HTMLElement, input: Input) => {
   if (input.password) await userEvent.type(getByLabelText(container, 'パスワード'), input.password)
   if (input.passwordConfirm)
     await userEvent.type(getByLabelText(container, 'パスワード（確認）'), input.passwordConfirm)
-  await userEvent.click(getByRole(container, 'button', { name: 'アカウント作成' }))
+  await userEvent.click(getByRole(container, 'button', { name: 'アカウント登録' }))
 }
