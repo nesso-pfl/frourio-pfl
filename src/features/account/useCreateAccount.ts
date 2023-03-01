@@ -3,18 +3,12 @@ import { apiClient } from '@/src/utils/apiClient'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
-import { z } from 'zod'
+import { createApiErrorSchema } from '../api'
 
 const createAccountErrorCodes = ['auth/invalid-password', 'auth/email-already-exists'] as const
 
 type RequestBody = Parameters<typeof apiClient.public.account.$post>[0]['body']
-const errorSchema = z.object({
-  response: z.object({
-    data: z.object({
-      code: z.enum(createAccountErrorCodes),
-    }),
-  }),
-})
+const errorSchema = createApiErrorSchema(createAccountErrorCodes)
 
 export const useCreateAccount = () => {
   const router = useRouter()
