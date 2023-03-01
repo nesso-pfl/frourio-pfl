@@ -22,6 +22,7 @@ const config: { projects: Config.InitialOptions[] } = {
     },
     {
       preset: 'ts-jest',
+      setupFilesAfterEnv: ['<rootDir>/test/setupTestForServer.ts'],
       testEnvironment: 'node',
       testMatch: ['<rootDir>/server/**/*.test.ts'],
       moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {

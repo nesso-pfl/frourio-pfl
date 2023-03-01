@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-dotenv.config()
+dotenv.config({ path: process.env.NODE_ENV === 'test' ? './server/.env' : '../.env' })
 
 function assertString(val: unknown, key: string): asserts val is string {
   if (typeof val !== 'string') throw new Error(`${key} should be defined`)
