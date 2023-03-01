@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run migrate:dev && run-p dev:*",
-    "dev:client": "next dev -p 8000",
+    "dev:client": "next dev -p 2220",
     "dev:server": "npm run dev --prefix server",
     "dev:aspida": "aspida --watch",
     "dev:pathpida": "pathpida --enableStatic --watch",
