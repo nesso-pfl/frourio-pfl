@@ -1,0 +1,26 @@
+function assertString(val: unknown, key: string): asserts val is string {
+  if (typeof val !== 'string') throw new Error(`${key} should be defined`)
+}
+
+assertString(process.env.NEXT_PUBLIC_API_KEY, 'NEXT_PUBLIC_API_KEY')
+assertString(process.env.NEXT_PUBLIC_AUTH_DOMAIN, 'NEXT_PUBLIC_AUTH_DOMAIN')
+assertString(process.env.NEXT_PUBLIC_PROJECT_ID, 'NEXT_PUBLIC_PROJECT_ID')
+assertString(process.env.NEXT_PUBLIC_STORAGE_BUCKET, 'NEXT_PUBLIC_STORAGE_BUCKET')
+assertString(process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID, 'NEXT_PUBLIC_MESSAGING_SENDER_ID')
+assertString(process.env.NEXT_PUBLIC_APP_ID, 'NEXT_PUBLIC_APP_ID')
+
+const NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY
+const NEXT_PUBLIC_AUTH_DOMAIN = process.env.NEXT_PUBLIC_AUTH_DOMAIN
+const NEXT_PUBLIC_PROJECT_ID = process.env.NEXT_PUBLIC_PROJECT_ID
+const NEXT_PUBLIC_STORAGE_BUCKET = process.env.NEXT_PUBLIC_STORAGE_BUCKET
+const NEXT_PUBLIC_MESSAGING_SENDER_ID = process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID
+const NEXT_PUBLIC_APP_ID = process.env.NEXT_PUBLIC_APP_ID
+
+export {
+  NEXT_PUBLIC_API_KEY,
+  NEXT_PUBLIC_AUTH_DOMAIN,
+  NEXT_PUBLIC_PROJECT_ID,
+  NEXT_PUBLIC_STORAGE_BUCKET,
+  NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  NEXT_PUBLIC_APP_ID,
+}
