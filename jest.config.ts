@@ -5,6 +5,7 @@ import { compilerOptions } from './tsconfig.json'
 const config: { projects: Config.InitialOptions[] } = {
   projects: [
     {
+      setupFilesAfterEnv: ['<rootDir>/test/setupTest.ts'],
       testPathIgnorePatterns: ['<rootDir>/server'],
       testEnvironment: 'jest-environment-jsdom',
       transform: {

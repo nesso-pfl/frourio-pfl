@@ -11,3 +11,9 @@ const customRender = (ui: React.ReactElement, options = {}) => render(ui, { wrap
 export * from '@testing-library/react'
 
 export { customRender as render }
+
+export type InvalidInputCase<T> = {
+  title: string
+  input: T
+  message: string
+}
