@@ -1,2 +1,3 @@
 export { createAccount } from './createAccount'
-export { Account } from './types'
+export type { CreateAccount } from './createAccount'
+export type { Account } from './types'

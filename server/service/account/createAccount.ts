@@ -2,7 +2,7 @@ import { depend } from 'velona'
 import { createFirebaseUser } from '$/lib/firebase'
 import { Account } from './types'
 
-type CreateAccount = {
+export type CreateAccount = {
   email: string
   password: string
 }

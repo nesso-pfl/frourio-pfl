@@ -1,2 +1,2 @@
 export { createUser } from './createUser'
-export { User } from './types'
+export type { User } from './types'
