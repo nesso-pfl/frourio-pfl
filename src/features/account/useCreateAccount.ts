@@ -13,7 +13,7 @@ const errorSchema = createApiErrorSchema(createAccountErrorCodes)
 export const useCreateAccount = () => {
   const router = useRouter()
   const successToast = useToast()
-  const failureToast = useToast({ status: 'error' })
+  const errorToast = useToast({ status: 'error' })
 
   const createAccount = useCallback(
     async (body: RequestBody) => {
@@ -31,11 +31,11 @@ export const useCreateAccount = () => {
               return { field: 'email', message: 'このメールアドレスは既に使われています' } as const
           }
         } else {
-          failureToast({ description: 'アカウントの作成に失敗しました。しばらく待ってからもう一度お試しください。' })
+          errorToast({ description: 'アカウントの作成に失敗しました。しばらく待ってからもう一度お試しください。' })
         }
       }
     },
-    [successToast, failureToast],
+    [successToast, errorToast],
   )
 
   return { createAccount }
