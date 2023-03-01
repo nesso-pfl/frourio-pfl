@@ -11,6 +11,7 @@ assertString(process.env.API_USER_PASS, 'API_USER_PASS ')
 assertString(process.env.API_SERVER_PORT, 'API_SERVER_PORT ')
 assertString(process.env.API_BASE_PATH, 'API_BASE_PATH ')
 assertString(process.env.API_ORIGIN, 'API_ORIGIN ')
+assertString(process.env.API_COOKIE_SECRET, 'API_COOKIE_SECRET ')
 assertString(process.env.API_UPLOAD_DIR, 'API_UPLOAD_DIR ')
 assertString(process.env.FIREBASE_PROJECT_ID, 'FIREBASE_PROJECT_ID')
 assertString(process.env.FIREBASE_PRIVATE_KEY, 'FIREBASE_PRIVATE_KEY')
@@ -21,6 +22,7 @@ const API_USER_PASS = process.env.API_USER_PASS
 const API_SERVER_PORT = +process.env.API_SERVER_PORT
 const API_BASE_PATH = process.env.API_BASE_PATH
 const API_ORIGIN = process.env.API_ORIGIN
+const API_COOKIE_SECRET = process.env.API_COOKIE_SECRET
 const API_UPLOAD_DIR = process.env.API_UPLOAD_DIR
 const FIREBASE_PROJECT_ID = process.env.FIREBASE_PROJECT_ID
 const FIREBASE_PRIVATE_KEY = process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
@@ -32,6 +34,7 @@ export {
   API_SERVER_PORT,
   API_BASE_PATH,
   API_ORIGIN,
+  API_COOKIE_SECRET,
   API_UPLOAD_DIR,
   FIREBASE_PROJECT_ID,
   FIREBASE_PRIVATE_KEY,
