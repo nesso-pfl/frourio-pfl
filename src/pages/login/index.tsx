@@ -1,5 +1,7 @@
+import { pagesPath } from '@/src/utils/$path'
 import { Box, Link } from '@chakra-ui/react'
 import type { NextPage } from 'next'
+import NextLink from 'next/link'
 import { LoginForm } from '~/features/account'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 
@@ -19,9 +21,11 @@ const Login: NextPage = () => {
         </Card.Container>
         <Box fontSize="sm" mt={12}>
           アカウント登録がまだの方は
-          <Link as="span" color="primary">
-            こちら
-          </Link>
+          <NextLink href={pagesPath.register.$url()}>
+            <Link as="span" color="primary">
+              こちら
+            </Link>
+          </NextLink>
         </Box>
       </Container>
     </Layout>
