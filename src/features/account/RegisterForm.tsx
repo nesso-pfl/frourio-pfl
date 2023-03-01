@@ -1,7 +1,7 @@
 import { VStack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { errorMessage } from '~/features/form'
+import { errorMessage, SubmitError } from '~/features/form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Form, Input } from '~/features/ui'
 import { useCallback } from 'react'
@@ -19,7 +19,7 @@ const formSchema = z
 export type Form = z.infer<typeof formSchema>
 
 type Props = {
-  onSubmit: (formValues: Form) => Promise<{ field: keyof Form; message: string } | undefined>
+  onSubmit: (formValues: Form) => Promise<SubmitError<Form> | undefined>
 }
 
 export const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
