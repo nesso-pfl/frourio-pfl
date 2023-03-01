@@ -3,7 +3,7 @@ import { createFirebaseUser } from '$/lib/firebase'
 import { Account } from './types'
 import { z } from 'zod'
 
-const createAccountErrorCodes = ['auth/invalid-password'] as const
+const createAccountErrorCodes = ['auth/invalid-password', 'auth/email-already-exists'] as const
 type CreateAccountErrorCode = (typeof createAccountErrorCodes)[number]
 
 class CreateAccountError extends Error {
@@ -34,7 +34,7 @@ export const createAccount = depend({ create }, async ({ create }, newAccount: C
     if (result.success) {
       throw new CreateAccountError(result.data.code)
     } else {
-      throw new Error()
+      throw error
     }
   }
 })
