@@ -1,7 +1,7 @@
 import fastify from 'fastify'
 import controller from './controller'
 
-describe('POST /public/account', () => {
+describe('POST /public/signup', () => {
   test('Firebase アカウントが作成できる', async () => {
     const injectedController = controller.inject((deps) => ({
       createAccount: deps.createAccount.inject({

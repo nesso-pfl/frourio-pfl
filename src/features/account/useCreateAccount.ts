@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import { createApiErrorSchema } from '../api'
 
-type RequestBody = Parameters<typeof apiClient.public.account.$post>[0]['body']
+type RequestBody = Parameters<typeof apiClient.public.signup.$post>[0]['body']
 const errorSchema = createApiErrorSchema(createAccountErrorCodes)
 
 export const useCreateAccount = () => {
@@ -17,7 +17,7 @@ export const useCreateAccount = () => {
   const createAccount = useCallback(
     async (body: RequestBody) => {
       try {
-        await apiClient.public.account.$post({ body })
+        await apiClient.public.signup.$post({ body })
         await router.push(pagesPath.login.$url())
         successToast({ description: 'アカウントを作成しました。' })
       } catch (error) {
