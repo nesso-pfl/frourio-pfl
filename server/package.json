@@ -25,6 +25,7 @@
     "start": "cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {
+    "@fastify/cookie": "^8.3.0",
     "@fastify/cors": "^8.2.0",
     "@fastify/helmet": "^10.1.0",
     "@fastify/jwt": "^6.3.3",
