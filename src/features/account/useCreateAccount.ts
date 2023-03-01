@@ -1,11 +1,10 @@
+import { createAccountErrorCodes } from '@/server/types/account'
 import { pagesPath } from '@/src/utils/$path'
 import { apiClient } from '@/src/utils/apiClient'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import { createApiErrorSchema } from '../api'
-
-const createAccountErrorCodes = ['auth/invalid-password', 'auth/email-already-exists'] as const
 
 type RequestBody = Parameters<typeof apiClient.public.account.$post>[0]['body']
 const errorSchema = createApiErrorSchema(createAccountErrorCodes)
