@@ -25,7 +25,7 @@ type Props = {
 export const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
     handleSubmit,
   } = useForm<Form>({ resolver: zodResolver(formSchema) })
@@ -55,7 +55,7 @@ export const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
           <Form.ErrorMessage>{errors.passwordConfirm?.message}</Form.ErrorMessage>
         </Form.Item>
       </VStack>
-      <Button type="submit" size="md" w="100%">
+      <Button type="submit" size="md" w="100%" isDisabled={isSubmitting}>
         アカウント登録
       </Button>
     </Form.Container>
