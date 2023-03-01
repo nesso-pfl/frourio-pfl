@@ -32,10 +32,16 @@ const invalidInputCases: InvalidInputCase<Input>[] = [
 const onSubmit = jest.fn()
 
 describe('features/account/RegisterForm', () => {
+  test('フォームが送信できる', async () => {
+    const { container } = render(<RegisterForm onSubmit={onSubmit} />)
+    await submitForm(container, validInput)
+    expect(onSubmit).toHaveBeenCalled()
+  })
   invalidInputCases.forEach(({ title, input, message }) => {
     test(title, async () => {
       const { container, findByText } = render(<RegisterForm onSubmit={onSubmit} />)
       await submitForm(container, input)
+      expect(onSubmit).not.toHaveBeenCalled()
       expect(await findByText(message)).toBeInTheDocument()
     })
   })
