@@ -12,18 +12,11 @@ const UserBanner = () => {
   const [search, setSearch] = useState('')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [token, setToken] = useState('')
-  const [userInfo, setUserInfo] = useState({} as UserInfo)
+  const [userInfo] = useState({} as UserInfo)
 
   const editIcon = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files?.length) return
-
-      setUserInfo(
-        await apiClient.user.$post({
-          headers: { authorization: token },
-          body: { icon: e.target.files[0] },
-        }),
-      )
     },
     [token],
   )
@@ -42,7 +35,6 @@ const UserBanner = () => {
       return alert('Login failed')
     }
 
-    setUserInfo(await apiClient.user.$get({ headers: { authorization: newToken } }))
     setIsLoggedIn(true)
   }, [])
 
