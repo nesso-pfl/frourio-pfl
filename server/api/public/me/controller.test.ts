@@ -1,3 +1,4 @@
+import { mockAccount } from '$/mocks'
 import fastify from 'fastify'
 import controller from './controller'
 
@@ -6,7 +7,7 @@ describe('GET /public/me', () => {
     const controller_ = controller(fastify())
 
     const res = controller_.get({
-      account: { firebaseUid: 'firebaseUid', email: 'test@test.test', emailVerified: true },
+      account: mockAccount(),
     })
 
     expect(res.status).toBe(200)

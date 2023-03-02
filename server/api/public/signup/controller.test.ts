@@ -1,3 +1,4 @@
+import { mockCreateAccount, mockUser } from '$/mocks'
 import fastify from 'fastify'
 import controller from './controller'
 
@@ -8,7 +9,7 @@ describe('POST /public/signup', () => {
         create: ({ email }) => Promise.resolve({ uid: 'firebaseUid', email, emailVerified: true }),
       }),
       createUser: deps.createUser.inject({
-        create: (newUser) => Promise.resolve({ id: 1, createdAt: new Date(), updatedAt: new Date(), ...newUser }),
+        create: (newUser) => Promise.resolve(mockUser(newUser)),
       }),
     }))(fastify())
 
@@ -33,7 +34,7 @@ describe('POST /public/signup', () => {
     }))(fastify())
 
     const res = await injectedController.post({
-      body: { email: 'test@test.test', password: 'stringPassword1234' },
+      body: mockCreateAccount(),
     })
 
     expect(deleteAccount).toHaveBeenCalled()
