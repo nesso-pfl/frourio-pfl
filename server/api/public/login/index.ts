@@ -1,5 +1,7 @@
+import { Request } from '$/types'
+
 export type Methods = {
   post: {
-    reqBody: { firebaseIdToken: string }
+    reqBody: Request<{ firebaseIdToken: string }>
   }
 }

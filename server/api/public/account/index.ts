@@ -1,8 +1,8 @@
-import { Account, CreateAccount } from '$/types'
+import { Account, CreateAccount, Request, Response } from '$/types'
 
 export type Methods = {
   post: {
-    reqBody: CreateAccount
-    resBody: Account
+    reqBody: Request<CreateAccount>
+    resBody: Response<Account>
   }
 }

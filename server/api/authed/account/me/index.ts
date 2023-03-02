@@ -1,7 +1,7 @@
-import { Account } from '$/types'
+import { Account, Response } from '$/types'
 
 export type Methods = {
   get: {
-    resBody: Account
+    resBody: Response<Account>
   }
 }
