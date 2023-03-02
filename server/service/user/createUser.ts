@@ -8,6 +8,7 @@ export class CreateUserError extends Error {
   constructor(code: CreateUserErrorCode) {
     super()
     this.code = code
+    Object.setPrototypeOf(this, new.target.prototype)
   }
 }
 const errorSchema = z.object({

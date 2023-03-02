@@ -9,6 +9,7 @@ export class CreateAccountError extends Error {
   constructor(code: CreateAccountErrorCode) {
     super()
     this.code = code
+    Object.setPrototypeOf(this, new.target.prototype)
   }
 }
 

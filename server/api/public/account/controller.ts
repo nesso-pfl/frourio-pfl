@@ -12,9 +12,8 @@ export default defineController(
           await createUser(account)
           return { status: 201, body: account }
         } catch (error) {
-          if (!(error instanceof CreateUserError)) throw error
-          await deleteAccount(account)
-          throw error
+          if (error instanceof CreateUserError) await deleteAccount(account)
+          return { status: 500, body: error }
         }
       } catch (error) {
         if (!(error instanceof CreateAccountError)) throw error
