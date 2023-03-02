@@ -24,9 +24,9 @@ let fastify: FastifyInstance
 beforeAll(() => {
   fastify = Fastify({ forceCloseConnections: true })
   fastify.register(cors)
-  fastify.post(apiClient.public.signup.$path(), (_, reply) => {
+  fastify.post(apiClient.public.account.$path(), (_, reply) => {
     reply.send(
-      res<typeof apiClient.public.signup.$post>({
+      res<typeof apiClient.public.account.$post>({
         firebaseUid: 'firebaseUid',
         email: 'test@test.test',
         emailVerified: true,

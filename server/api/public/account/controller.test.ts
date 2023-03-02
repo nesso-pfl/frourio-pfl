@@ -2,7 +2,7 @@ import { mockCreateAccount, mockUser } from '$/mocks'
 import fastify from 'fastify'
 import controller from './controller'
 
-describe('POST /public/signup', () => {
+describe('POST /public/account', () => {
   test('Firebase アカウントが作成できる', async () => {
     const injectedController = controller.inject((deps) => ({
       createAccount: deps.createAccount.inject({
