@@ -15,7 +15,7 @@ export const useLogin = () => {
     async (args: Args) => {
       try {
         const firebaseUser = await signin(args.email, args.password)
-        await apiClient.public.signin.$post({ body: { firebaseIdToken: await firebaseUser.getIdToken() } })
+        await apiClient.public.login.$post({ body: { firebaseIdToken: await firebaseUser.getIdToken() } })
       } catch (error) {
         if (error instanceof SigninError) {
           switch (error.code) {
