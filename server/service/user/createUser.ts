@@ -2,15 +2,9 @@ import { depend } from 'velona'
 import { prisma } from '$/lib/prisma'
 import { CreateUser, CreateUserErrorCode, createUserErrorCodes, User } from '$/types'
 import { z } from 'zod'
+import { AppError } from '$/util/AppError'
 
-export class CreateUserError extends Error {
-  code: string
-  constructor(code: CreateUserErrorCode) {
-    super()
-    this.code = code
-    Object.setPrototypeOf(this, new.target.prototype)
-  }
-}
+export class CreateUserError extends AppError<CreateUserErrorCode> {}
 const errorSchema = z.object({
   code: z.enum(createUserErrorCodes),
 })

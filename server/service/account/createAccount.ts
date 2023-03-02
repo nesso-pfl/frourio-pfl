@@ -3,15 +3,9 @@ import { createFirebaseUser } from '$/lib/firebase'
 import { z } from 'zod'
 import { Account, CreateAccount } from '$/types'
 import { CreateAccountErrorCode, createAccountErrorCodes } from '$/types/account'
+import { AppError } from '$/util/AppError'
 
-export class CreateAccountError extends Error {
-  code: string
-  constructor(code: CreateAccountErrorCode) {
-    super()
-    this.code = code
-    Object.setPrototypeOf(this, new.target.prototype)
-  }
-}
+export class CreateAccountError extends AppError<CreateAccountErrorCode> {}
 
 const errorSchema = z.object({
   code: z.enum(createAccountErrorCodes),
