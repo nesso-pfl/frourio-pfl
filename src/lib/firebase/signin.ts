@@ -27,7 +27,7 @@ export const signin = async (email: string, password: string): Promise<FirebaseU
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     if (!userCredential.user.email) throw new Error("user's email should be non-nullable")
-    return { ...userCredential.user, email: userCredential.user.email }
+    return { ...userCredential.user, email: userCredential.user.email, getIdToken: userCredential.user.getIdToken }
   } catch (e) {
     const result = errorSchema.safeParse(e)
     if (result.success) {

@@ -3,10 +3,12 @@ import { Box, Link } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import { LoginForm } from '~/features/account'
+import { LoginForm, useLogin } from '~/features/account'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 
 const Login: NextPage = () => {
+  const { login } = useLogin()
+
   return (
     <Layout>
       <Head>
@@ -16,11 +18,7 @@ const Login: NextPage = () => {
         <Heading variant="pageTitle">Frourio Pfl にログイン</Heading>
         <Card.Container>
           <Card.Body>
-            <LoginForm
-              onSubmit={async () => {
-                // ログイン処理
-              }}
-            />
+            <LoginForm onSubmit={login} />
           </Card.Body>
         </Card.Container>
         <Box fontSize="sm" mt={12}>

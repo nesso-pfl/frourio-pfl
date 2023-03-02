@@ -1,9 +1,10 @@
 import { VStack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { errorMessage } from '~/features/form'
+import { errorMessage, SubmitError } from '~/features/form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Form, Input } from '~/features/ui'
+import { useCallback } from 'react'
 
 const formSchema = z.object({
   email: z.string().min(1, errorMessage.required).email(errorMessage.email),
@@ -12,17 +13,29 @@ const formSchema = z.object({
 export type Form = z.infer<typeof formSchema>
 
 type Props = {
-  onSubmit: (formValues: Form) => Promise<unknown>
+  onSubmit: (formValues: Form) => Promise<SubmitError<Form> | undefined>
 }
 
 export const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   const {
     register,
     formState: { errors },
+    setError,
     handleSubmit,
   } = useForm<Form>({ resolver: zodResolver(formSchema) })
+
+  const onSubmit_ = useCallback(
+    async (formValues: Form) => {
+      const result = await onSubmit(formValues)
+      if (result) {
+        setError(result.field, { message: result.message })
+      }
+    },
+    [onSubmit],
+  )
+
   return (
-    <Form.Container onSubmit={handleSubmit(onSubmit)} minW="300px">
+    <Form.Container onSubmit={handleSubmit(onSubmit_)} minW="300px">
       <VStack spacing={5} mb={12}>
         <Form.Item isInvalid={!!errors.email?.message}>
           <Form.Label fontSize="sm">メールアドレス</Form.Label>
