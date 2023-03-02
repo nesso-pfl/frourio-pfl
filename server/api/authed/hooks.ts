@@ -7,9 +7,9 @@ export type AdditionalRequest = {
 }
 
 export default defineHooks(() => ({
-  preHandler: async (req, reply) => {
+  onRequest: async (req, reply) => {
     if (!req.cookies?.[sessionCookieKey]) {
-      reply.status(401)
+      reply.status(401).send()
       return
     }
 
@@ -18,7 +18,7 @@ export default defineHooks(() => ({
       req.account = account
     } catch {
       reply.clearCookie(sessionCookieKey)
-      reply.status(401)
+      reply.status(401).send()
     }
   },
 }))

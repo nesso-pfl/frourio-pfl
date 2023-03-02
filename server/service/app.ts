@@ -4,13 +4,13 @@ import helmet from '@fastify/helmet'
 import cors from '@fastify/cors'
 import cookie from '@fastify/cookie'
 import fastifyStatic from '@fastify/static'
-import { API_BASE_PATH, API_COOKIE_SECRET, API_UPLOAD_DIR } from '$/service/envValues'
+import { API_BASE_PATH, API_COOKIE_SECRET, API_UPLOAD_DIR, CLIENT_ORIGIN } from '$/service/envValues'
 import server from '$/$server'
 
 export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory })
   app.register(helmet, { crossOriginResourcePolicy: false })
-  app.register(cors)
+  app.register(cors, { origin: CLIENT_ORIGIN, credentials: true })
   app.register(fastifyStatic, {
     root: path.join(__dirname, 'static'),
     prefix: '/static/',
