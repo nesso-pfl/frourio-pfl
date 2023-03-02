@@ -12,7 +12,12 @@ type CreateHandlerOption<Response> = Partial<{
   response: Response
   onRequest: () => unknown
 }>
-const createHandler = (path: string, method: Method, status: Status, options?: CreateHandlerOption<DefaultBodyType>) =>
+export const createHandler = (
+  path: string,
+  method: Method,
+  status: Status,
+  options?: CreateHandlerOption<DefaultBodyType>,
+) =>
   rest[method](path, (_, res, ctx) => {
     if (options?.onRequest) options.onRequest()
     return res(ctx.status(status), ctx.delay(delayMs), ctx.json(options?.response))

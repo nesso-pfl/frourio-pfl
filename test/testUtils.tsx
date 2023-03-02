@@ -21,3 +21,10 @@ export type InvalidInputCase<T> = {
   input: T
   message: string
 }
+
+export type ServerErrorCase<ErrorCode> = {
+  errorCode: ErrorCode
+  statusCode: number
+  // 画面上に表示されるべき文言
+  message: string
+}

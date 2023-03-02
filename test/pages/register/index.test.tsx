@@ -1,50 +1,41 @@
-import dotenv from 'dotenv'
-import Fastify, { FastifyInstance } from 'fastify'
-import cors from '@fastify/cors'
-import aspida from '@aspida/axios'
-import api from '$/api/$api'
-import { render } from '@/test/testUtils'
+import { render, ServerErrorCase } from '@/test/testUtils'
 import Register from '@/src/pages/register'
 import { submitForm, validInput } from '@/src/features/account/RegisterForm.test-input'
 import mockRouter from 'next-router-mock'
 import { pagesPath } from '@/src/utils/$path'
+import { CreateAccountErrorCode, CreateUserErrorCode } from '@/server/types'
+import { server } from '@/src/mocks/server'
+import { createHandler, postWith201 } from '@/src/mocks/handlers'
+import { apiClient } from '@/src/utils/apiClient'
 
-dotenv.config({ path: 'server/.env' })
-jest.mock('next/router', () => require('next-router-mock'))
-
-const apiClient = api(aspida(undefined, { baseURL: process.env.API_BASE_PATH }))
-const res = function <T extends (args: Parameters<T>[0]) => unknown>(
-  data: ReturnType<T> extends Promise<infer S> ? S : never,
-) {
-  return data
-}
-
-let fastify: FastifyInstance
-
-beforeAll(() => {
-  fastify = Fastify({ forceCloseConnections: true })
-  fastify.register(cors)
-  fastify.post(apiClient.public.account.$path(), (_, reply) => {
-    reply.send(
-      res<typeof apiClient.public.account.$post>({
-        firebaseUid: 'firebaseUid',
-        email: 'test@test.test',
-        emailVerified: true,
-      }),
-    )
-  })
-
-  return fastify.listen({ port: +(process.env.API_SERVER_PORT ?? '8080') })
-})
-
-afterAll(() => fastify.close())
+const serverErrorCases: ServerErrorCase<CreateAccountErrorCode | CreateUserErrorCode>[] = [
+  { errorCode: 'auth/email-already-exists', statusCode: 400, message: 'このメールアドレスは既に使われています' },
+  { errorCode: 'auth/invalid-password', statusCode: 400, message: 'パスワードは6文字以上で入力してください' },
+  {
+    errorCode: 'create-user-error',
+    statusCode: 500,
+    message: 'アカウントの登録に失敗しました。しばらく待ってからもう一度お試しください。',
+  },
+]
 
 describe('/register', () => {
   test('アカウントが登録できる', async () => {
+    const createAccount = jest.fn()
+    server.use(postWith201(apiClient.public.account, { onRequest: createAccount }))
     const { container, findByText } = render(<Register />)
     await submitForm(container, validInput)
 
+    expect(createAccount).toHaveBeenCalled()
     expect(await findByText('アカウントを登録しました。')).toBeInTheDocument()
     expect(mockRouter).toMatchObject({ asPath: pagesPath.login.$url().pathname })
+  })
+  serverErrorCases.forEach(({ errorCode, statusCode, message }) => {
+    test(`サーバーの ${errorCode} エラーによりアカウント登録に失敗したら「${message}」と表示する`, async () => {
+      server.use(createHandler(apiClient.public.account.$path(), 'post', statusCode, { response: { code: errorCode } }))
+      const { container, findByText } = render(<Register />)
+      await submitForm(container, validInput)
+
+      expect(await findByText(message)).toBeInTheDocument()
+    })
   })
 })

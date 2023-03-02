@@ -6,7 +6,7 @@ const config: { projects: Config.InitialOptions[] } = {
   projects: [
     {
       setupFilesAfterEnv: ['<rootDir>/test/setupTest.ts'],
-      testPathIgnorePatterns: ['<rootDir>/server'],
+      testPathIgnorePatterns: ['<rootDir>/server', '/node_modules/'],
       testEnvironment: 'jest-environment-jsdom',
       transform: {
         '^.+\\.tsx$': 'babel-jest',
