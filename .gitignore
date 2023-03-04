@@ -36,3 +36,9 @@ server/**/$*.ts
 server/**/*.db
 server/index.js
 server/upload/
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
