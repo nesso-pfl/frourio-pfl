@@ -13,3 +13,7 @@ variable "username" {
 variable "password" {
   type = string
 }
+
+variable "subnet_ids" {
+  type = list(string)
+}

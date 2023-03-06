@@ -34,4 +34,5 @@ module "aws_rds" {
   db_name       = "frouriopfl"
   username      = "psqluser"
   password      = "password"
+  subnet_ids    = module.aws_vpc.aws_subnet_ids
 }
