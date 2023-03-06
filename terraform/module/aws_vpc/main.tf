@@ -2,6 +2,25 @@ resource "aws_vpc" "frourio_pfl" {
   cidr_block = "172.31.0.0/16"
 }
 
+resource "aws_security_group" "allow_tls" {
+  name   = "allow_tls"
+  vpc_id = aws_vpc.frourio_pfl.id
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.frourio_pfl.cidr_block]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_internet_gateway" "default" {
   vpc_id = aws_vpc.frourio_pfl.id
 }
