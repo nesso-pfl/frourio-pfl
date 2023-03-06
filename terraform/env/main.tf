@@ -22,7 +22,12 @@ module "aws_ecr" {
     aws = aws.ue1
   }
 }
-
+module "aws_ecs" {
+  source = "../module/aws_ecs"
+}
+module "aws_vpc" {
+  source = "../module/aws_vpc"
+}
 module "aws_rds" {
   source        = "../module/aws_rds"
   instance_name = "frourio-pfl"
