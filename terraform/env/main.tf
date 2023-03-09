@@ -16,18 +16,27 @@ provider "aws" {
   alias  = "ue1"
 }
 
+/*
 module "aws_ecr" {
   source = "../module/aws_ecr"
   providers = {
     aws = aws.ue1
   }
 }
+*/
+
+module "aws_role" {
+  source = "../module/aws_role"
+}
 module "aws_ecs" {
-  source = "../module/aws_ecs"
+  source             = "../module/aws_ecs"
+  subnet_ids         = module.aws_vpc.aws_subnet_ids
+  execution_role_arn = module.aws_role.execution_role_arn
 }
 module "aws_vpc" {
   source = "../module/aws_vpc"
 }
+/*
 module "aws_rds" {
   source        = "../module/aws_rds"
   instance_name = "frourio-pfl"
@@ -36,3 +45,4 @@ module "aws_rds" {
   password      = "password"
   subnet_ids    = module.aws_vpc.aws_subnet_ids
 }
+*/

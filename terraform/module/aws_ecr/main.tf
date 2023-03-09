@@ -17,7 +17,7 @@ resource "aws_ecrpublic_repository" "frourio_pfl_app" {
 
 resource "null_resource" "push_app_image" {
   provisioner "local-exec" {
-    command = "echo hoi"
+    command = "cd ${var.project_root}"
   }
 
   provisioner "local-exec" {
