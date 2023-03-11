@@ -1,0 +1,21 @@
+[
+  {
+    "name": "${SERVICE_NAME}",
+    "image": "${ECR_ARN}",
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 2221,
+        "hostPort": 2221
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "${LOG_DRIVER}",
+      "options": {
+        "awslogs-region": "${REGION}",
+        "awslogs-group": "${LOGS_GROUP_NAME}",
+        "awslogs-stream-prefix": "${SERVICE_NAME}"
+      }
+    }
+  }
+]
