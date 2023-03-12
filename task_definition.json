@@ -1,0 +1,46 @@
+{
+  "family": "frourio-pfl-task",
+  "containerDefinitions": [
+    {
+      "name": "frourio-pfl-service",
+      "image": "392942584695.dkr.ecr.ap-northeast-1.amazonaws.com/frourio-pfl-repository",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 2221,
+          "hostPort": 2221,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/frourio-pfl-service",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "frourio-pfl-service"
+        }
+      }
+    }
+  ],
+  "executionRoleArn": "arn:aws:iam::392942584695:role/frourio-pfl-role",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "tags": [
+    {
+      "key": "Name",
+      "value": "frourio-pfl-task"
+    },
+    {
+      "key": "group",
+      "value": "frourio-pfl"
+    }
+  ]
+}
