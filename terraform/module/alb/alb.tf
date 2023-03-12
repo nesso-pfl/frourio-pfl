@@ -23,9 +23,13 @@ resource "aws_alb_listener" "default" {
   load_balancer_arn = aws_lb.default.arn
   port              = "80"
   protocol          = "HTTP"
+  certificate_arn   = var.acm.arn
 
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.default.arn
   }
+  depends_on = [
+    var.acm
+  ]
 }

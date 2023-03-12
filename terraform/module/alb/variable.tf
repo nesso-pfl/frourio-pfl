@@ -10,6 +10,7 @@ variable "tag_group" {}
 variable "public_a_id" {}
 variable "public_c_id" {}
 variable "sg_id" {}
+variable "acm" {}
 
 # Target Group
 variable "vpc_id" {}

@@ -70,6 +70,10 @@ module "cloudwatch" {
   tag_group   = var.tag_group
 }
 
+# ACM
+module "acm" {
+  source = "../module/aws_acm"
+}
 # ALB
 module "alb" {
   source = "../module/alb"
@@ -83,6 +87,7 @@ module "alb" {
   public_a_id = module.network.public_a_id
   public_c_id = module.network.public_c_id
   sg_id       = module.sg.sg_id
+  acm         = module.acm
 }
 
 # ECS
