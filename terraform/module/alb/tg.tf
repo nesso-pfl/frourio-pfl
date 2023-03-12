@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "default" {
-  name                 = local.tg_name
+  name_prefix          = "fr-pfl"
   vpc_id               = var.vpc_id
   target_type          = "ip"
   port                 = 80

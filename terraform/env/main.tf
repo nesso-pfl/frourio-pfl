@@ -70,9 +70,16 @@ module "cloudwatch" {
   tag_group   = var.tag_group
 }
 
+# Route53
+module "route53" {
+  source   = "../module/aws_route53"
+  dns_name = module.alb.dns_name
+  acm      = module.acm.acm
+}
 # ACM
 module "acm" {
-  source = "../module/aws_acm"
+  source   = "../module/aws_acm"
+  dns_name = "*.frourio-pfl.nesso-pfl.click"
 }
 # ALB
 module "alb" {
@@ -87,7 +94,7 @@ module "alb" {
   public_a_id = module.network.public_a_id
   public_c_id = module.network.public_c_id
   sg_id       = module.sg.sg_id
-  acm         = module.acm
+  acm         = module.acm.acm
 }
 
 # ECS

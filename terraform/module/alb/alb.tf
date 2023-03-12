@@ -21,8 +21,8 @@ resource "aws_lb" "default" {
 
 resource "aws_alb_listener" "default" {
   load_balancer_arn = aws_lb.default.arn
-  port              = "80"
-  protocol          = "HTTP"
+  port              = "443"
+  protocol          = "HTTPS"
   certificate_arn   = var.acm.arn
 
   default_action {
@@ -32,4 +32,18 @@ resource "aws_alb_listener" "default" {
   depends_on = [
     var.acm
   ]
+}
+
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.default.arn
+  port              = "80"
+  protocol          = "HTTP"
+  default_action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
 }
