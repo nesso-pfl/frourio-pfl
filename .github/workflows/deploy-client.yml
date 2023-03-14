@@ -5,41 +5,58 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
 jobs:
-  deploy:
-    name: Deploy
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create env file
+        run: |
+          echo "${{ secrets.ENV_FILE_PROD_CLIENT }}" > ./.env
+          echo "${{ secrets.ENV_FILE_PROD_SERVER }}" > ./server/.env
+          echo "${{ secrets.ENV_FILE_PROD_DB }}" > ./server/prisma/.env
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: |
-          if test -n '${{ secrets.GH_PAGES_BASE_PATH }}'; then
-            CLIENT_BASE_PATH='${{ secrets.GH_PAGES_BASE_PATH }}'
-          else
-            CLIENT_BASE_PATH="/$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')"
-          fi
-          echo "CLIENT_BASE_PATH=$CLIENT_BASE_PATH" >> $GITHUB_ENV
-      - uses: actions/cache@v3
-        id: client-yarn-cache
+          cache: yarn
+      - name: Restore cache
+        uses: actions/cache@v3
         with:
-          path: 'node_modules'
-          key: client-yarn-${{ hashFiles('yarn.lock') }}
-      - uses: actions/cache@v3
-        id: server-yarn-cache
+          path: |
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn --cwd server
+      - name: Build with Next.js
+        run: yarn build:client
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          path: 'server/node_modules'
-          key: server-yarn-${{ hashFiles('server/yarn.lock') }}
-      - run: yarn install
-        if: steps.client-yarn-cache.outputs.cache-hit != 'true'
-      - run: yarn install --cwd server
-        if: steps.server-yarn-cache.outputs.cache-hit != 'true'
-      - run: yarn run build:client
-        env:
-          API_ORIGIN: ${{ secrets.API_ORIGIN }}
-          API_BASE_PATH: ${{ secrets.API_BASE_PATH }}
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          path: ./out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

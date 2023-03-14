@@ -35,6 +35,12 @@ jobs:
             ${{ github.ref }}
             refs/head/main
 
+      - name: Create env file
+        run: |
+          echo "${{ secrets.ENV_FILE_PROD_CLIENT }}" > ./.env
+          echo "${{ secrets.ENV_FILE_PROD_SERVER }}" > ./server/.env
+          echo "${{ secrets.ENV_FILE_PROD_DB }}" > ./server/prisma/.env
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v2

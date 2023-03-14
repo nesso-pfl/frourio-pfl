@@ -6,12 +6,22 @@ resource "aws_route53_zone" "default" {
   }
 }
 
-resource "aws_route53_record" "default" {
-  zone_id = aws_route53_zone.default.zone_id
-  name    = "api.${var.base_domain_name}"
-  type    = "CNAME"
-  ttl     = "300"
-  records = [var.alb_dns_name]
+resource "aws_route53_record" "client" {
+  zone_id         = aws_route53_zone.default.zone_id
+  name            = "app.${var.base_domain_name}"
+  type            = "CNAME"
+  ttl             = "300"
+  records         = [var.gh_page_dns_name]
+  allow_overwrite = true
+}
+
+resource "aws_route53_record" "server" {
+  zone_id         = aws_route53_zone.default.zone_id
+  name            = "api.${var.base_domain_name}"
+  type            = "CNAME"
+  ttl             = "300"
+  records         = [var.alb_dns_name]
+  allow_overwrite = true
 }
 
 resource "aws_route53_record" "cert_validation" {

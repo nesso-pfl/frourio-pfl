@@ -7,6 +7,9 @@ variable "project_name" {
 variable "base_domain_name" {
   type = string
 }
+variable "gh_page_dns_name" {
+  type = string
+}
 variable "app_health_check_path" {
   type    = string
   default = "/api/public/healthCheck"

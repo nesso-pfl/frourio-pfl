@@ -68,6 +68,7 @@ module "route53" {
 
   project_name     = var.project_name
   base_domain_name = var.base_domain_name
+  gh_page_dns_name = var.gh_page_dns_name
   alb_dns_name     = module.alb.alb_dns_name
   acm              = module.acm.acm
 }
