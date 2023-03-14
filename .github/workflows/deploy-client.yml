@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 18
@@ -21,12 +21,12 @@ jobs:
             CLIENT_BASE_PATH="/$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')"
           fi
           echo "CLIENT_BASE_PATH=$CLIENT_BASE_PATH" >> $GITHUB_ENV
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: client-yarn-cache
         with:
           path: 'node_modules'
           key: client-yarn-${{ hashFiles('yarn.lock') }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: server-yarn-cache
         with:
           path: 'server/node_modules'

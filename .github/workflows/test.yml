@@ -19,17 +19,17 @@ jobs:
       API_ORIGIN: http://localhost:8080
       API_BASE_PATH: /api
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 18
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: client-yarn-cache
         with:
           path: 'node_modules'
           key: client-yarn-${{ hashFiles('yarn.lock') }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: server-yarn-cache
         with:
           path: 'server/node_modules'
