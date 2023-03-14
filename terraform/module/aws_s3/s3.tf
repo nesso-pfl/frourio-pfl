@@ -1,9 +1,8 @@
 resource "aws_s3_bucket" "env_files" {
-  bucket = "${var.name_prefix}-bucket"
+  bucket = "${var.project_name}-bucket"
 
   tags = {
-    Name  = "${var.tag_name}-bucket"
-    group = "${var.tag_group}"
+    Name = "${var.project_name}-s3-bucket"
   }
 }
 resource "aws_s3_bucket_acl" "env_files" {
@@ -16,16 +15,28 @@ resource "aws_s3_object" "server_env_file" {
   key    = local.server_env_file_path
   source = var.server_env_file_path
   etag   = filemd5(var.server_env_file_path)
+
+  tags = {
+    Name = "${var.project_name}-s3-server-env"
+  }
 }
 resource "aws_s3_object" "client_env_file" {
   bucket = aws_s3_bucket.env_files.id
   key    = local.client_env_file_path
   source = var.client_env_file_path
   etag   = filemd5(var.client_env_file_path)
+
+  tags = {
+    Name = "${var.project_name}-s3-client-env"
+  }
 }
 resource "aws_s3_object" "db_env_file" {
   bucket = aws_s3_bucket.env_files.id
   key    = local.db_env_file_path
   source = var.db_env_file_path
   etag   = filemd5(var.db_env_file_path)
+
+  tags = {
+    Name = "${var.project_name}-s3-db-env"
+  }
 }

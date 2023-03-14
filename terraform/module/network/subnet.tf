@@ -4,8 +4,7 @@ resource "aws_subnet" "public_a" {
   availability_zone = "ap-northeast-1a"
 
   tags = {
-    Name  = "${var.tag_name}-subnet-a"
-    group = "${var.tag_group}"
+    Name = "${var.project_name}-subnet-a"
   }
 }
 
@@ -15,7 +14,6 @@ resource "aws_subnet" "public_c" {
   availability_zone = "ap-northeast-1c"
 
   tags = {
-    Name  = "${var.tag_name}-subnet-c"
-    group = "${var.tag_group}"
+    Name = "${var.project_name}-subnet-c"
   }
 }

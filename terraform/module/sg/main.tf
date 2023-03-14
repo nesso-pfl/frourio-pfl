@@ -3,8 +3,7 @@ resource "aws_security_group" "default" {
   vpc_id = var.vpc_id
 
   tags = {
-    Name  = "${var.tag_name}-cluster"
-    group = "${var.tag_group}"
+    Name = "${var.project_name}-cluster"
   }
 }
 

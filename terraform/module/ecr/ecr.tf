@@ -7,8 +7,7 @@ resource "aws_ecr_repository" "default" {
   }
 
   tags = {
-    Name  = "${var.tag_name}-repository"
-    group = "${var.tag_group}"
+    Name = "${var.project_name}-ecr-repository"
   }
 }
 
@@ -17,7 +16,6 @@ resource "null_resource" "default" {
     command = "sh ${path.module}/dockerbuild.sh"
 
     environment = {
-      AWS_REGION     = var.region
       REPO_URL       = aws_ecr_repository.default.repository_url
       CONTAINER_NAME = "${local.container_name}"
       DOCKER_PATH    = "${local.docker_path}"

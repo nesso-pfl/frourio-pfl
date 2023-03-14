@@ -8,7 +8,7 @@ resource "aws_lb_target_group" "default" {
   depends_on           = [aws_lb.default]
 
   health_check {
-    path                = "/api/public/healthCheck"
+    path                = var.app_health_check_path
     healthy_threshold   = 5
     unhealthy_threshold = 2
     timeout             = 5
@@ -20,5 +20,8 @@ resource "aws_lb_target_group" "default" {
 
   lifecycle {
     create_before_destroy = true
+  }
+  tags = {
+    Name = "${var.project_name}-tg"
   }
 }

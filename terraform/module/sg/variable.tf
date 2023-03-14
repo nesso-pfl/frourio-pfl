@@ -1,15 +1,9 @@
-# Global
-variable "region" {}
-variable "name_prefix" {}
-
 # Tags
-variable "tag_name" {}
-variable "tag_group" {}
+variable "project_name" {}
 
 # SG
-variable "sg_ingress_ip_cidr" {}
 variable "vpc_id" {}
 
 locals {
-  sg_name = "${var.name_prefix}-sg"
+  sg_name = "${var.project_name}-sg"
 }

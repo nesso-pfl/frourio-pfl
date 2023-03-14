@@ -1,5 +1,5 @@
-resource "aws_db_instance" "frourio_pfl" {
-  identifier           = var.instance_name
+resource "aws_db_instance" "default" {
+  identifier           = var.project_name
   allocated_storage    = 20
   storage_type         = "gp2"
   engine               = "postgres"
@@ -9,10 +9,15 @@ resource "aws_db_instance" "frourio_pfl" {
   username             = var.username
   password             = var.password
   skip_final_snapshot  = true
-  db_subnet_group_name = aws_db_subnet_group.frourio_pfl.name
+  db_subnet_group_name = aws_db_subnet_group.default.name
+  tags = {
+    Name = "${var.project_name}-rds"
+  }
 }
 
-resource "aws_db_subnet_group" "frourio_pfl" {
-  name       = "frourio-pfl"
-  subnet_ids = var.subnet_ids
+resource "aws_db_subnet_group" "default" {
+  name = var.project_name
+  tags = {
+    Name = "${var.project_name}-db-subnet-group"
+  }
 }

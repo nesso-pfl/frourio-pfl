@@ -1,12 +1,8 @@
-# Global
-variable "region" {}
-variable "name_prefix" {}
-
-# Tags
-variable "tag_name" {}
-variable "tag_group" {}
+variable "project_name" {
+  type = string
+}
 
 locals {
-  logs_group_name   = "/ecs/${var.name_prefix}-service"
+  logs_group_name   = "/ecs/${var.project_name}-service"
   retention_in_days = 30
 }

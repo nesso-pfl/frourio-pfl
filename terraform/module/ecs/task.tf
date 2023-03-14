@@ -6,7 +6,7 @@ data "template_file" "default" {
     ECR_ARN                           = "${var.ecr_repository_uri}"
     LOGS_GROUP_NAME                   = "${var.logs_group_name}"
     LOG_DRIVER                        = "${local.task_log_driver}"
-    REGION                            = "${var.region}"
+    WEBAPP_PORT                       = var.webapp_port
   }
 }
 
@@ -20,7 +20,6 @@ resource "aws_ecs_task_definition" "default" {
   execution_role_arn       = var.execution_role_arn
 
   tags = {
-    Name  = "${var.tag_name}-task"
-    group = "${var.tag_group}"
+    Name = local.task_definitions_name
   }
 }

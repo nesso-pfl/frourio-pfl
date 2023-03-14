@@ -27,8 +27,7 @@ resource "aws_iam_role" "default" {
   assume_role_policy = data.aws_iam_policy_document.default.json
 
   tags = {
-    Name  = "${var.tag_name}-repository"
-    group = "${var.tag_group}"
+    Name = "${var.project_name}-repository"
   }
 }
 

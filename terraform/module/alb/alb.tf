@@ -14,12 +14,11 @@ resource "aws_lb" "default" {
   ]
 
   tags = {
-    Name  = "${var.tag_name}-alb"
-    group = "${var.tag_group}"
+    Name = local.alb_name
   }
 }
 
-resource "aws_alb_listener" "default" {
+resource "aws_alb_listener" "https" {
   load_balancer_arn = aws_lb.default.arn
   port              = "443"
   protocol          = "HTTPS"
@@ -32,9 +31,12 @@ resource "aws_alb_listener" "default" {
   depends_on = [
     var.acm
   ]
+  tags = {
+    Name = "${local.alb_name}-listener-https"
+  }
 }
 
-resource "aws_lb_listener" "http" {
+resource "aws_alb_listener" "http" {
   load_balancer_arn = aws_lb.default.arn
   port              = "80"
   protocol          = "HTTP"
@@ -45,5 +47,8 @@ resource "aws_lb_listener" "http" {
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
+  }
+  tags = {
+    Name = "${local.alb_name}-listener-http"
   }
 }

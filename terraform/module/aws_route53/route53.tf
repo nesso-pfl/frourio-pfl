@@ -1,13 +1,17 @@
 resource "aws_route53_zone" "default" {
-  name = "frourio-pfl.nesso-pfl.click"
+  name = var.base_domain_name
+
+  tags = {
+    Name = "${var.project_name}-host-zone"
+  }
 }
 
 resource "aws_route53_record" "default" {
   zone_id = aws_route53_zone.default.zone_id
-  name    = "api.frourio-pfl.nesso-pfl.click"
+  name    = "api.${var.base_domain_name}"
   type    = "CNAME"
   ttl     = "300"
-  records = [var.dns_name]
+  records = [var.alb_dns_name]
 }
 
 resource "aws_route53_record" "cert_validation" {

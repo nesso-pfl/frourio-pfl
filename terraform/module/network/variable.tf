@@ -1,10 +1,5 @@
-# Global
-variable "region" {}
-variable "name_prefix" {}
-
 # Tags
-variable "tag_name" {}
-variable "tag_group" {}
+variable "project_name" {}
 
 # Internet Gateway
 

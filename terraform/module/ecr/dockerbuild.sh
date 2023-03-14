@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Docker login
-aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REPO_URL
+aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $REPO_URL
 
 # Build image
 export CONTAINER_NAME=$CONTAINER_NAME

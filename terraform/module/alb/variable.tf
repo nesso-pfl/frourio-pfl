@@ -1,21 +1,27 @@
-# Global
-variable "region" {}
-variable "name_prefix" {}
-
-# Tags
-variable "tag_name" {}
-variable "tag_group" {}
+variable "project_name" {
+  type = string
+}
 
 # ALB
-variable "public_a_id" {}
-variable "public_c_id" {}
-variable "sg_id" {}
+variable "public_a_id" {
+  type = string
+}
+variable "public_c_id" {
+  type = string
+}
+variable "sg_id" {
+  type = string
+}
 variable "acm" {}
 
 # Target Group
-variable "vpc_id" {}
+variable "vpc_id" {
+  type = string
+}
+variable "app_health_check_path" {
+  type = string
+}
 
 locals {
-  alb_name = "${var.name_prefix}-alb"
-  tg_name  = "${var.name_prefix}-tg"
+  alb_name = "${var.project_name}-alb"
 }

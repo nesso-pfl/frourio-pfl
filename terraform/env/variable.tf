@@ -1,23 +1,27 @@
-# Global
-variable "region" {
-  type = string
-}
-variable "name_prefix" {
-  type = string
-}
 variable "webapp_port" {
   type = number
 }
-
-# Tags
-variable "tag_name" {
+variable "project_name" {
   type = string
 }
-variable "tag_group" {
+variable "base_domain_name" {
+  type = string
+}
+variable "app_health_check_path" {
+  type    = string
+  default = "/api/public/healthCheck"
+}
+
+variable "db_name" {
+  type = string
+}
+variable "db_username" {
+  type = string
+}
+variable "db_password" {
   type = string
 }
 
-# S3
 variable "server_env_file_path" {
   type    = string
   default = "../../server/.env.production.local"
@@ -29,10 +33,4 @@ variable "client_env_file_path" {
 variable "db_env_file_path" {
   type    = string
   default = "../../server/prisma/.env.production.local"
-}
-
-
-# SG
-variable "sg_ingress_ip_cidr" {
-  type = string
 }

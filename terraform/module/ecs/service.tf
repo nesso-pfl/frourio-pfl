@@ -21,4 +21,8 @@ resource "aws_ecs_service" "default" {
     ]
     assign_public_ip = true
   }
+
+  tags = {
+    Name = "${var.project_name}-service"
+  }
 }

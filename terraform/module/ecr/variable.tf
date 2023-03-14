@@ -1,13 +1,7 @@
-# Global
-variable "region" {}
-variable "name_prefix" {}
-
-# Tags
-variable "tag_name" {}
-variable "tag_group" {}
+variable "project_name" {}
 
 locals {
-  repository_name = "${var.name_prefix}-repository"
-  container_name  = var.name_prefix
+  repository_name = "${var.project_name}-repository"
+  container_name  = "${var.project_name}-app"
   docker_path     = "./terraform/dockerfile/app/Dockerfile"
 }

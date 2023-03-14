@@ -1,12 +1,7 @@
-# Global
-variable "region" {}
-variable "name_prefix" {}
+variable "project_name" {
+  type = string
+}
 
-# Tags
-variable "tag_name" {}
-variable "tag_group" {}
-
-# S3
 variable "server_env_file_path" {
   type = string
 }
