@@ -1,11 +1,12 @@
 data "template_file" "default" {
   template = file("${local.task_definitions_filepath}")
   vars = {
-    SERVICE_NAME    = "${local.service_name}"
-    ECR_ARN         = "${var.ecr_repository_uri}"
-    LOGS_GROUP_NAME = "${var.logs_group_name}"
-    LOG_DRIVER      = "${local.task_log_driver}"
-    REGION          = "${var.region}"
+    SERVICE_NAME                      = "${local.service_name}"
+    SERVER_ENV_FILE_BUCKET_OBJECT_ARN = "${var.server_env_file_bucket_object_arn}"
+    ECR_ARN                           = "${var.ecr_repository_uri}"
+    LOGS_GROUP_NAME                   = "${var.logs_group_name}"
+    LOG_DRIVER                        = "${local.task_log_driver}"
+    REGION                            = "${var.region}"
   }
 }
 

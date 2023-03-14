@@ -10,6 +10,9 @@ variable "tag_group" {}
 # Task
 variable "ecr_repository_uri" {}
 variable "execution_role_arn" {}
+variable "server_env_file_bucket_object_arn" {
+  type = string
+}
 
 # Service
 variable "logs_group_name" {}

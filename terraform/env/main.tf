@@ -17,6 +17,18 @@ provider "aws" {
 }
 
 
+# S3
+module "s3" {
+  source               = "../module/aws_s3"
+  name_prefix          = var.name_prefix
+  region               = var.region
+  tag_name             = var.tag_name
+  tag_group            = var.tag_group
+  server_env_file_path = var.server_env_file_path
+  client_env_file_path = var.client_env_file_path
+  db_env_file_path     = var.db_env_file_path
+}
+
 # ECR
 module "ecr" {
   source = "../module/ecr"
@@ -31,10 +43,16 @@ module "ecr" {
 module "iam" {
   source = "../module/iam"
 
-  name_prefix = var.name_prefix
-  region      = var.region
-  tag_name    = var.tag_name
-  tag_group   = var.tag_group
+  name_prefix   = var.name_prefix
+  region        = var.region
+  tag_name      = var.tag_name
+  tag_group     = var.tag_group
+  s3_bucket_arn = module.s3.env_files_bucket.arn
+  s3_env_file_object_arns = [
+    module.s3.server_env_file_bucket_object_arn,
+    module.s3.client_env_file_bucket_object_arn,
+    module.s3.db_env_file_bucket_object_arn
+  ]
 }
 
 # Network
@@ -114,8 +132,9 @@ module "ecs" {
   public_c_id     = module.network.public_c_id
   sg_id           = module.sg.sg_id
   # Task
-  ecr_repository_uri = module.ecr.repository_uri
-  execution_role_arn = module.iam.execution_role_arn
+  ecr_repository_uri                = module.ecr.repository_uri
+  execution_role_arn                = module.iam.execution_role_arn
+  server_env_file_bucket_object_arn = module.s3.server_env_file_bucket_object_arn
 }
 
 /*

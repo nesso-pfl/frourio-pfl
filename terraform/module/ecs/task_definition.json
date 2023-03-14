@@ -3,6 +3,12 @@
     "name": "${SERVICE_NAME}",
     "image": "${ECR_ARN}",
     "essential": true,
+    "environmentFiles": [
+      {
+        "value": "${SERVER_ENV_FILE_BUCKET_OBJECT_ARN}",
+        "type": "s3"
+      }
+    ],
     "portMappings": [
       {
         "containerPort": 2221,
