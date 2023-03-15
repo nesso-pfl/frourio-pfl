@@ -9,6 +9,9 @@
         "type": "s3"
       }
     ],
+    "environment" : [
+      { "name" : "ENDPOINT", "value" : "${ENDPOINT}"}
+    ],
     "portMappings": [
       {
         "containerPort": ${WEBAPP_PORT},

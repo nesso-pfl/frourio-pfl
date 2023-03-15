@@ -15,6 +15,9 @@ variable "execution_role_arn" {
 variable "server_env_file_bucket_object_arn" {
   type = string
 }
+variable "db_address" {
+  type = string
+}
 
 # Service
 variable "logs_group_name" {

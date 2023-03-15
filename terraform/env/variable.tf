@@ -24,6 +24,9 @@ variable "db_username" {
 variable "db_password" {
   type = string
 }
+variable "db_port" {
+  type = string
+}
 
 variable "server_env_file_path" {
   type    = string

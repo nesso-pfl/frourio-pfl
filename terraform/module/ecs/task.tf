@@ -7,6 +7,7 @@ data "template_file" "default" {
     LOGS_GROUP_NAME                   = "${var.logs_group_name}"
     LOG_DRIVER                        = "${local.task_log_driver}"
     WEBAPP_PORT                       = var.webapp_port
+    ENDPOINT                          = var.db_address
   }
 }
 

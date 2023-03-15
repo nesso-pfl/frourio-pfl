@@ -55,6 +55,8 @@ module "sg" {
 
   project_name = var.project_name
   vpc_id       = module.network.vpc_id
+  webapp_port  = var.webapp_port
+  db_port      = var.db_port
 }
 
 module "cloudwatch" {
@@ -88,7 +90,7 @@ module "alb" {
   vpc_id                = module.network.vpc_id
   public_a_id           = module.network.public_a_id
   public_c_id           = module.network.public_c_id
-  sg_id                 = module.sg.sg_id
+  sg_id                 = module.sg.sg_ecs_id
   acm                   = module.acm.acm
 }
 
@@ -102,21 +104,22 @@ module "ecs" {
   tg_arn          = module.alb.tg_arn
   public_a_id     = module.network.public_a_id
   public_c_id     = module.network.public_c_id
-  sg_id           = module.sg.sg_id
+  sg_id           = module.sg.sg_ecs_id
   # Task
   ecr_repository_uri                = module.ecr.repository_uri
   execution_role_arn                = module.iam.execution_role_arn
   server_env_file_bucket_object_arn = module.s3.server_env_file_bucket_object_arn
+  db_address                        = module.aws_rds.aws_rds.address
 }
 
-/*
 module "aws_rds" {
-  source        = "../module/aws_rds"
+  source = "../module/aws_rds"
 
   project_name = var.project_name
-  db_name       = var.db_name
-  username      = var.db_username
-  password      = var.db_password
-  subnet_ids    = module.aws_vpc.aws_subnet_ids
+  db_name      = var.db_name
+  username     = var.db_username
+  password     = var.db_password
+  port         = var.db_port
+  sg_id        = module.sg.sg_rds_id
+  subnet_ids   = [module.network.private_a_id, module.network.private_c_id]
 }
-*/
