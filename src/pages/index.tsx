@@ -1,13 +1,15 @@
-import { NextPage } from 'next'
 import { AuthCheck } from '../features/account'
 import { Layout } from '../features/ui'
 
-const Home: NextPage = () => {
-  return (
-    <AuthCheck>
-      <Layout>home</Layout>
-    </AuthCheck>
-  )
+function Home() {
+  return <>home</>
 }
 
 export default Home
+Home.getLayout = (page: React.ReactElement) => {
+  return (
+    <AuthCheck>
+      <Layout>{page}</Layout>
+    </AuthCheck>
+  )
+}

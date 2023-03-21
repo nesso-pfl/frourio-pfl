@@ -1,16 +1,15 @@
 import { Box, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import type { NextPage } from 'next'
 import { RegisterForm, useCreateAccount } from '~/features/account'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 import { pagesPath } from '@/src/utils/$path'
 import Head from 'next/head'
 
-const Register: NextPage = () => {
+function Register() {
   const { createAccount } = useCreateAccount()
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>アカウント登録 | Frourio Pfl</title>
       </Head>
@@ -30,8 +29,11 @@ const Register: NextPage = () => {
           </NextLink>
         </Box>
       </Container>
-    </Layout>
+    </>
   )
 }
 
 export default Register
+Register.getLayout = (page: React.ReactElement) => {
+  return <Layout>{page}</Layout>
+}

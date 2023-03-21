@@ -1,16 +1,15 @@
 import { pagesPath } from '@/src/utils/$path'
 import { Box, Link } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { LoginForm, useLogin } from '~/features/account'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 
-const Login: NextPage = () => {
+function Login() {
   const { login } = useLogin()
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>ログイン | Frourio Pfl</title>
       </Head>
@@ -30,8 +29,11 @@ const Login: NextPage = () => {
           </NextLink>
         </Box>
       </Container>
-    </Layout>
+    </>
   )
 }
 
 export default Login
+Login.getLayout = (page: React.ReactElement) => {
+  return <Layout>{page}</Layout>
+}
