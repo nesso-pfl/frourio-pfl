@@ -1,5 +1,8 @@
 export const pagesPath = {
   "auth_action": {
+    "password_reset_complete": {
+      $url: (url?: { hash?: string }) => ({ pathname: '/auth-action/password-reset-complete' as const, hash: url?.hash })
+    },
     $url: (url?: { hash?: string }) => ({ pathname: '/auth-action' as const, hash: url?.hash })
   },
   "login": {

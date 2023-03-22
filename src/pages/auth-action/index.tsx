@@ -1,4 +1,4 @@
-import { VerifyEmail } from '@/src/features/auth'
+import { PasswordReset, VerifyEmail } from '@/src/features/auth'
 import { Center, Spinner } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
@@ -19,9 +19,9 @@ export default function Page() {
   }, [router])
   switch (query?.mode) {
     case 'resetPassword':
-      return <></>
+      return <PasswordReset code={query.oobCode} />
     case 'verifyEmail':
-      return <VerifyEmail code={query.oobCode.toString()} />
+      return <VerifyEmail code={query.oobCode} />
     default:
       return (
         <Center w="100vw" h="100vh">

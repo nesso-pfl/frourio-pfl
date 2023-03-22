@@ -1,9 +1,8 @@
-import { PasswordResetForm } from '~/features/auth'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 import { pagesPath } from '@/src/utils/$path'
 import Head from 'next/head'
 import { useCallback } from 'react'
-import { Form } from '@/src/features/auth/PasswordResetForm'
+import { Form, SendPasswordResetEmailForm } from '@/src/features/auth/SendPasswordResetEmailForm'
 import { sendPasswordResetEmail } from '@/src/lib/firebase'
 import { useRouter } from 'next/router'
 
@@ -25,7 +24,7 @@ export default function Page() {
         <Heading variant="pageTitle">パスワードをリセット</Heading>
         <Card.Container>
           <Card.Body>
-            <PasswordResetForm onSubmit={handleSubmit} />
+            <SendPasswordResetEmailForm onSubmit={handleSubmit} />
           </Card.Body>
         </Card.Container>
       </Container>
