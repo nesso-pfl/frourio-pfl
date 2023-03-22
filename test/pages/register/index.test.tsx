@@ -1,41 +1,66 @@
-import { render, ServerErrorCase } from '@/test/testUtils'
+import { render } from '@/test/testUtils'
 import Register from '@/src/pages/register'
 import { submitForm, validInput } from '@/src/features/account/RegisterForm.test-input'
 import mockRouter from 'next-router-mock'
 import { pagesPath } from '@/src/utils/$path'
-import { CreateAccountErrorCode, CreateUserErrorCode } from '@/server/types'
-import { server } from '@/src/mocks/server'
-import { createHandler, postWith201 } from '@/src/mocks/handlers'
-import { apiClient } from '@/src/utils/apiClient'
-
-const serverErrorCases: ServerErrorCase<CreateAccountErrorCode | CreateUserErrorCode>[] = [
-  { errorCode: 'auth/email-already-exists', statusCode: 400, message: 'このメールアドレスは既に使われています' },
-  { errorCode: 'auth/invalid-password', statusCode: 400, message: 'パスワードは6文字以上で入力してください' },
-  {
-    errorCode: 'create-user-error',
-    statusCode: 500,
-    message: 'アカウントの登録に失敗しました。しばらく待ってからもう一度お試しください。',
-  },
-]
+import { CreateUserError } from '@/src/lib/firebase'
 
 describe('/register', () => {
   test('アカウントが登録できる', async () => {
-    const createAccount = jest.fn()
-    server.use(postWith201(apiClient.public.account, { onRequest: createAccount }))
-    const { container, findByText } = render(<Register />)
+    const InjectedPage = Register.inject((deps) => ({
+      useCreateAccount: deps.useCreateAccount.inject({
+        createUserAndSendEmailVerification: () => Promise.resolve(),
+      }),
+    }))
+    const { container } = render(<InjectedPage />)
     await submitForm(container, validInput)
 
-    expect(createAccount).toHaveBeenCalled()
-    expect(await findByText('アカウントを登録しました。')).toBeInTheDocument()
-    expect(mockRouter).toMatchObject({ asPath: pagesPath.login.$url().pathname })
+    expect(mockRouter).toMatchObject({ asPath: pagesPath.register.complete.$url().pathname })
   })
-  serverErrorCases.forEach(({ errorCode, statusCode, message }) => {
-    test(`サーバーの ${errorCode} エラーによりアカウント登録に失敗したら「${message}」と表示する`, async () => {
-      server.use(createHandler(apiClient.public.account.$path(), 'post', statusCode, { response: { code: errorCode } }))
-      const { container, findByText } = render(<Register />)
-      await submitForm(container, validInput)
+  test(`既に使われているメールアドレスでアカウント登録をしようとすると失敗する`, async () => {
+    const InjectedPage = Register.inject((deps) => ({
+      useCreateAccount: deps.useCreateAccount.inject({
+        createUserAndSendEmailVerification: () => Promise.reject(new CreateUserError('auth/email-already-in-use')),
+      }),
+    }))
+    const { container, findByText } = render(<InjectedPage />)
+    await submitForm(container, validInput)
 
-      expect(await findByText(message)).toBeInTheDocument()
-    })
+    expect(await findByText('このメールアドレスは既に使われています')).toBeInTheDocument()
+  })
+  test(`弱いパスワード値でアカウント登録をしようとすると失敗する`, async () => {
+    const InjectedPage = Register.inject((deps) => ({
+      useCreateAccount: deps.useCreateAccount.inject({
+        createUserAndSendEmailVerification: () => Promise.reject(new CreateUserError('auth/weak-password')),
+      }),
+    }))
+    const { container, findByText } = render(<InjectedPage />)
+    await submitForm(container, validInput)
+
+    expect(await findByText('パスワードは6文字以上で入力してください')).toBeInTheDocument()
+  })
+  test(`無効なメールアドレスでアカウント登録をしようとすると失敗する`, async () => {
+    const InjectedPage = Register.inject((deps) => ({
+      useCreateAccount: deps.useCreateAccount.inject({
+        createUserAndSendEmailVerification: () => Promise.reject(new CreateUserError('auth/invalid-email')),
+      }),
+    }))
+    const { container, findByText } = render(<InjectedPage />)
+    await submitForm(container, validInput)
+
+    expect(await findByText('このメールアドレスは使用できません')).toBeInTheDocument()
+  })
+  test(`想定外のエラーによりアカウント登録に失敗するとメッセージを表示する`, async () => {
+    const InjectedPage = Register.inject((deps) => ({
+      useCreateAccount: deps.useCreateAccount.inject({
+        createUserAndSendEmailVerification: () => Promise.reject(new Error('Unexpected error')),
+      }),
+    }))
+    const { container, findByText } = render(<InjectedPage />)
+    await submitForm(container, validInput)
+
+    expect(
+      await findByText('アカウントの登録に失敗しました。しばらく待ってからもう一度お試しください。'),
+    ).toBeInTheDocument()
   })
 })

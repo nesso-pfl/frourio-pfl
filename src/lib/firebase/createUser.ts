@@ -1,3 +1,4 @@
+import { AppError } from '@/src/utils/AppError'
 import { createUserWithEmailAndPassword, UserCredential } from 'firebase/auth'
 import { z } from 'zod'
 import { auth } from './auth'
@@ -8,13 +9,7 @@ export type CreateUserErrorCode = (typeof createUserErrorCodes)[number]
 const errorSchema = z.object({
   code: z.enum(createUserErrorCodes),
 })
-export class CreateUserError extends Error {
-  code: CreateUserErrorCode
-  constructor(code: CreateUserErrorCode) {
-    super()
-    this.code = code
-  }
-}
+export class CreateUserError extends AppError<CreateUserErrorCode> {}
 
 export const createUser = async ({ email, password }: { email: string; password: string }): Promise<UserCredential> => {
   try {

@@ -6967,6 +6967,11 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+velona@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/velona/-/velona-0.7.0.tgz#9f1f5b4c9095959977fcc292f30600866b34ee97"
+  integrity sha512-+lFXKHJxj7mK3OnYKLHGijf+LCPvv8Mphvy3JETAGvKbn2179dQcOxvlYggOzYUfVHSn9kWmerivMZBtz3eN0Q==
+
 w3c-xmlserializer@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/w3c-xmlserializer/-/w3c-xmlserializer-4.0.0.tgz#aebdc84920d806222936e3cdce408e32488a3073"

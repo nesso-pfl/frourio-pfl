@@ -4,8 +4,9 @@ import { RegisterForm, useCreateAccount } from '~/features/account'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 import { pagesPath } from '@/src/utils/$path'
 import Head from 'next/head'
+import { depend } from 'velona'
 
-function Register() {
+const Register = depend({ useCreateAccount }, ({ useCreateAccount }) => {
   const { createAccount } = useCreateAccount()
 
   return (
@@ -31,9 +32,10 @@ function Register() {
       </Container>
     </>
   )
-}
+})
 
-export default Register
-Register.getLayout = (page: React.ReactElement) => {
+const Page: typeof Register & { getLayout?: (page: React.ReactElement) => React.ReactNode } = Register
+export default Page
+Page.getLayout = (page: React.ReactElement) => {
   return <Layout>{page}</Layout>
 }
