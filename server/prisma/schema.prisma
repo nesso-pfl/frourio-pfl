@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
+model FirebaseUser {
   id          Int      @id @default(autoincrement())
   firebaseUid String   @unique
   createdAt   DateTime @default(now())

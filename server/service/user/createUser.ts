@@ -10,7 +10,7 @@ const errorSchema = z.object({
 })
 
 const create = async ({ firebaseUid }: CreateUser) => {
-  return await prisma.user.create({ data: { firebaseUid } })
+  return await prisma.firebaseUser.create({ data: { firebaseUid } })
 }
 export const createUser = depend({ create }, async ({ create }, newUser: CreateUser): Promise<User> => {
   try {
