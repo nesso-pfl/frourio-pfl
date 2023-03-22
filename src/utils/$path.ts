@@ -1,4 +1,7 @@
 export const pagesPath = {
+  "auth_action": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/auth-action' as const, hash: url?.hash })
+  },
   "login": {
     $url: (url?: { hash?: string }) => ({ pathname: '/login' as const, hash: url?.hash })
   },
@@ -12,3 +15,9 @@ export const pagesPath = {
 }
 
 export type PagesPath = typeof pagesPath
+
+export const staticPath = {
+  favicon_png: '/favicon.png'
+} as const
+
+export type StaticPath = typeof staticPath
