@@ -1,7 +1,7 @@
 import { auth } from './auth'
-import { FirebaseUser } from './FirebaseUser'
+import { FirebaseAdminUser } from './FirebaseAdminUser'
 
-export const verifyIdToken = async (idToken: string): Promise<FirebaseUser> => {
+export const verifyIdToken = async (idToken: string): Promise<FirebaseAdminUser> => {
   const decodedIdToken = await auth.verifyIdToken(idToken)
   if (!decodedIdToken.email) throw new Error('email not found in decodedIdToken')
 

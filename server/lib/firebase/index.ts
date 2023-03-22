@@ -1,5 +1,5 @@
-export { createFirebaseUser } from './createFirebaseUser'
+export { createFirebaseAdminUser } from './createFirebaseAdminUser'
 export { createSessionCookie } from './createSessionCookie'
-export { deleteFirebaseUser } from './deleteFirebaseUser'
+export { deleteFirebaseAdminUser } from './deleteFirebaseAdminUser'
 export { verifyIdToken } from './verifyIdToken'
 export { verifySessionCookie } from './verifySessionCookie'

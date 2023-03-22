@@ -1,5 +1,5 @@
 import { depend } from 'velona'
-import { createFirebaseUser } from '$/lib/firebase'
+import { createFirebaseAdminUser } from '$/lib/firebase'
 import { z } from 'zod'
 import { Account, CreateAccount } from '$/types'
 import { CreateAccountErrorCode, createAccountErrorCodes } from '$/types/account'
@@ -12,12 +12,12 @@ const errorSchema = z.object({
 })
 
 const create = async ({ email, password }: CreateAccount) => {
-  return createFirebaseUser(email, password)
+  return createFirebaseAdminUser(email, password)
 }
 export const createAccount = depend({ create }, async ({ create }, newAccount: CreateAccount): Promise<Account> => {
   try {
-    const firebaseUser = await create(newAccount)
-    return { ...firebaseUser, firebaseUid: firebaseUser.uid }
+    const firebaseAdminUser = await create(newAccount)
+    return { ...firebaseAdminUser, firebaseUid: firebaseAdminUser.uid }
   } catch (error) {
     const result = errorSchema.safeParse(error)
     if (result.success) {

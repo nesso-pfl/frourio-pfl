@@ -10,8 +10,8 @@ const postRequestBodySchema = z.object({
 export default defineHooks(() => ({
   preHandler: async (req, reply) => {
     const body = postRequestBodySchema.parse(req.body)
-    const firebaseUser = await verifyIdToken(body.firebaseIdToken)
-    if (!firebaseUser.emailVerified) {
+    const firebaseAdminUser = await verifyIdToken(body.firebaseIdToken)
+    if (!firebaseAdminUser.emailVerified) {
       reply.status(401).send()
       return
     }
