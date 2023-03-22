@@ -18,12 +18,12 @@ export class SendEmailVerificationError extends Error {
 export const sendEmailVerification = async (user: User) => {
   try {
     await sendEmailVerification_(user)
-  } catch (e) {
-    const result = errorSchema.safeParse(e)
+  } catch (error) {
+    const result = errorSchema.safeParse(error)
     if (result.success) {
       throw new SendEmailVerificationError(result.data.code)
     } else {
-      throw e
+      throw error
     }
   }
 }
