@@ -1,4 +1,5 @@
 export { createUser, CreateUserError } from './createUser'
 export { sendEmailVerification, SendEmailVerificationError } from './sendEmailVerification'
+export { sendPasswordResetEmail } from './sendPasswordResetEmail'
 export { signin, SigninError } from './signin'
 export { verifyEmail, VerifyEmailError, verifyEmailErrorCodes, type VerifyEmailErrorCode } from './verifyEmail'

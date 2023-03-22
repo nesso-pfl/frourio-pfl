@@ -13,14 +13,22 @@ function Login() {
       <Head>
         <title>ログイン | Frourio Pfl</title>
       </Head>
-      <Container pt={32} centerContent>
+      <Container pt={[12, 32]} centerContent>
         <Heading variant="pageTitle">Frourio Pfl にログイン</Heading>
         <Card.Container>
           <Card.Body>
             <LoginForm onSubmit={login} />
           </Card.Body>
         </Card.Container>
-        <Box fontSize="sm" mt={12}>
+        <Box fontSize="sm" mt={8}>
+          パスワードをお忘れの方は
+          <NextLink href={pagesPath.password_reset.$url()}>
+            <Link as="span" color="primary">
+              こちら
+            </Link>
+          </NextLink>
+        </Box>
+        <Box fontSize="sm" mt={2}>
           アカウント登録がまだの方は
           <NextLink href={pagesPath.register.$url()}>
             <Link as="span" color="primary">

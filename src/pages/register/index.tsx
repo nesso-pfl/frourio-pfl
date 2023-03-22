@@ -13,7 +13,7 @@ function Register() {
       <Head>
         <title>アカウント登録 | Frourio Pfl</title>
       </Head>
-      <Container pt={32} centerContent>
+      <Container pt={[12, 32]} centerContent>
         <Heading variant="pageTitle">Frourio Pfl にようこそ！</Heading>
         <Card.Container>
           <Card.Body>
