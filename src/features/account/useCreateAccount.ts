@@ -17,8 +17,7 @@ export const useCreateAccount = () => {
       try {
         const userCredential = await createUser({ email: body.email, password: body.password })
         await sendEmailVerification(userCredential.user)
-        await router.push(pagesPath.login.$url())
-        successToast({ description: 'アカウントを登録しました。' })
+        await router.push(pagesPath.register.complete.$url())
       } catch (error) {
         if (error instanceof CreateUserError) {
           switch (error.code) {
@@ -34,7 +33,8 @@ export const useCreateAccount = () => {
         } else if (error instanceof SendEmailVerificationError) {
           switch (error.code) {
             case 'auth/too-many-requests':
-              errorToast({ description: 'アカウントの登録に失敗しました。しばらく待ってからもう一度お試しください。' })
+              // アカウントの仮登録は成功しているはずなので、一旦仮完了とし、ログイン画面で再度メアド確認メールを送信するようにする
+              await router.push(pagesPath.register.complete.$url())
               break
           }
         } else {
