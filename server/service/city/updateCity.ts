@@ -8,7 +8,9 @@ const update = async (id: number, params: UpdateCity) => {
     where: { id },
     data: {
       ...restParams,
-      features: { connectOrCreate: features.map((feature) => ({ create: feature, where: { name: feature.name } })) },
+      features: {
+        connectOrCreate: features.map((feature) => ({ create: { name: feature }, where: { name: feature } })),
+      },
     },
     include: { features: true },
   })
