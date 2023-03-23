@@ -1,4 +1,4 @@
-import { Response, City } from '$/types'
+import { Response, City, CreateCity, UpdateCity } from '$/types'
 
 export const cityToResponse = (city: City): Response<City> => {
   return {
@@ -8,5 +8,19 @@ export const cityToResponse = (city: City): Response<City> => {
     features: [],
     createdAt: city.createdAt.toISOString(),
     updatedAt: city.updatedAt.toISOString(),
+  }
+}
+
+export const createCityToResponse = (city: CreateCity): Response<CreateCity> => {
+  return {
+    ...city,
+    startedAt: city.startedAt.toISOString(),
+  }
+}
+
+export const updateCityToResponse = (city: UpdateCity): Response<UpdateCity> => {
+  return {
+    ...city,
+    startedAt: city.startedAt.toISOString(),
   }
 }
