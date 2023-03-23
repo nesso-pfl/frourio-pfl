@@ -4,7 +4,7 @@ import { CityQuery } from '$/types'
 import { Prisma } from '@prisma/client'
 
 const queryToOrderBy = (query: CityQuery): Prisma.Enumerable<Prisma.CityOrderByWithRelationInput> => {
-  switch (query?.orderBy) {
+  switch (query.orderBy) {
     case 'nameKana:asc':
       return { nameKana: 'asc' }
     case 'nameKana:desc':
@@ -19,8 +19,8 @@ const queryToOrderBy = (query: CityQuery): Prisma.Enumerable<Prisma.CityOrderByW
 }
 
 const findMany = async (query: CityQuery) => {
-  const page = query?.page ?? 1
-  const takeCount = query?.limit ?? 20
+  const page = query.page ?? 1
+  const takeCount = query.limit ?? 20
   const cities = await prisma.city.findMany({
     skip: takeCount * (page - 1),
     take: takeCount,
@@ -28,14 +28,14 @@ const findMany = async (query: CityQuery) => {
     where: {
       OR: [
         {
-          name: { contains: query?.nameOrNameKana },
+          name: { contains: query.nameOrNameKana },
         },
         {
-          nameKana: { contains: query?.nameOrNameKana },
+          nameKana: { contains: query.nameOrNameKana },
         },
       ],
-      category: { in: query?.categories },
-      features: { some: { name: { in: query?.features } } },
+      category: { in: query.categories },
+      features: { some: { name: { in: query.features } } },
     },
     include: { features: true },
   })

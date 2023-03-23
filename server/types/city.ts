@@ -19,16 +19,14 @@ export type CreateCity = Pick<City, 'name' | 'nameKana' | 'category' | 'startedA
 
 export const cityQueryOrderBies = ['nameKana:asc', 'nameKana:desc', 'startedAt:asc', 'startedAt:desc'] as const
 export type CityQueryOrderBy = (typeof cityQueryOrderBies)[number]
-export const cityQuerySchema = z
-  .object({
-    page: z.number().optional(),
-    limit: z.number().optional(),
-    orderBy: z.enum(cityQueryOrderBies).optional(),
-    nameOrNameKana: z.string().optional(),
-    categories: z.array(z.enum(cityCategories)).optional(),
-    features: z.array(z.string()).optional(),
-  })
-  .optional()
+export const cityQuerySchema = z.object({
+  page: z.number().optional(),
+  limit: z.number().optional(),
+  orderBy: z.enum(cityQueryOrderBies).optional(),
+  nameOrNameKana: z.string().optional(),
+  categories: z.array(z.enum(cityCategories)).optional(),
+  features: z.array(z.string()).optional(),
+})
 export type CityQuery = z.infer<typeof cityQuerySchema>
 
 export type UpdateCity = Pick<City, 'name' | 'nameKana' | 'category' | 'startedAt'> & { features: string[] }
