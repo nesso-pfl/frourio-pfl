@@ -5,7 +5,12 @@ import { CreateCity, City } from '$/types'
 const create = async (newCity: CreateCity) => {
   const { features, ...restData } = newCity
   return await prisma.city.create({
-    data: { ...restData, features: { create: features } },
+    data: {
+      ...restData,
+      features: {
+        connectOrCreate: features.map((feature) => ({ create: { name: feature }, where: { name: feature } })),
+      },
+    },
     include: { features: true },
   })
 }
