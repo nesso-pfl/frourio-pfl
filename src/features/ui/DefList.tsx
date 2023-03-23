@@ -1,4 +1,5 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { forwardRef, Grid, GridItem, GridProps } from '@chakra-ui/react'
+import React from 'react'
 
 type DefItem = {
   key: string
@@ -8,21 +9,21 @@ type DefItem = {
 
 type Props = {
   items: DefItem[]
-}
+} & GridProps
 
-export const DefList: React.FC<Props> = ({ items }) => {
+export const DefList = forwardRef<Props, 'dl'>(({ items }, ref) => {
   return (
-    <Grid as="dl" templateColumns="auto 1fr" columnGap={2}>
+    <Grid as="dl" ref={ref} templateColumns="auto 1fr" columnGap={2}>
       {items.map(({ key, term, desc }) => (
-        <>
-          <GridItem key={key} as="dt" display="flex" alignItems="center">
+        <React.Fragment key={key}>
+          <GridItem as="dt" display="flex" alignItems="center">
             {term}
           </GridItem>
-          <GridItem key={key} as="dd" display="flex" alignItems="center" fontSize="sm">
+          <GridItem as="dd" display="flex" alignItems="center" fontSize="sm">
             {desc}
           </GridItem>
-        </>
+        </React.Fragment>
       ))}
     </Grid>
   )
-}
+})
