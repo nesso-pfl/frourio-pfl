@@ -1,9 +1,14 @@
+import type { OptionalQuery as OptionalQuery0 } from '../pages/city'
+
 export const pagesPath = {
   "auth_action": {
     "password_reset_complete": {
       $url: (url?: { hash?: string }) => ({ pathname: '/auth-action/password-reset-complete' as const, hash: url?.hash })
     },
     $url: (url?: { hash?: string }) => ({ pathname: '/auth-action' as const, hash: url?.hash })
+  },
+  "city": {
+    $url: (url?: { query?: OptionalQuery0, hash?: string }) => ({ pathname: '/city' as const, query: url?.query, hash: url?.hash })
   },
   "login": {
     $url: (url?: { hash?: string }) => ({ pathname: '/login' as const, hash: url?.hash })
