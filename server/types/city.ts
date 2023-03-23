@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import { CityFeature } from './cityFeature'
 
 export const cityCategories = ['local', 'legend'] as const
@@ -15,10 +16,19 @@ export type City = {
 }
 
 export type CreateCity = Pick<City, 'name' | 'nameKana' | 'category' | 'startedAt' | 'features'>
-export type CityQuery = {
-  orderBy: 'nameKana:asc' | 'nameKana:desc' | 'startAt:asc' | 'startedAt:desc'
-  nameOrNameKana: string
-  categories: CityCategory[]
-  features: string[]
-}
+
+export const cityQueryOrderBies = ['nameKana:asc', 'nameKana:desc', 'startedAt:asc', 'startedAt:desc'] as const
+export type CityQueryOrderBy = (typeof cityQueryOrderBies)[number]
+export const cityQuerySchema = z
+  .object({
+    page: z.number().optional(),
+    limit: z.number().optional(),
+    orderBy: z.enum(cityQueryOrderBies).optional(),
+    nameOrNameKana: z.string().optional(),
+    categories: z.array(z.enum(cityCategories)).optional(),
+    features: z.array(z.string()).optional(),
+  })
+  .optional()
+export type CityQuery = z.infer<typeof cityQuerySchema>
+
 export type UpdateCity = Pick<City, 'name' | 'nameKana' | 'category' | 'startedAt' | 'features'>
