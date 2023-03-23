@@ -1,3 +1,4 @@
+export type { City, CreateCity, CityQuery, UpdateCity } from './city'
 export { CreateUserError, createUserErrorCodes } from './user'
 export type { User, CreateUser } from './user'
 export { createAccountErrorCodes, CreateAccountError } from './account'
