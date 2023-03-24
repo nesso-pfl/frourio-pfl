@@ -14,7 +14,6 @@ export const cityToResponse = (city: City): Response<City> => {
 export const createCityToResponse = (city: CreateCity): Response<CreateCity> => {
   return {
     ...city,
-    startedAt: city.startedAt.toISOString(),
   }
 }
 

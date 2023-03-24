@@ -4,6 +4,7 @@ export type Methods = {
   get: {
     query?: Request<CityQuery>
     resBody: Response<{
+      totalCount: number
       cities: City[]
     }>
   }
