@@ -1,4 +1,5 @@
 export { CitySearchFormCard } from './CitySearchFormCard'
+export { CityForm } from './CityForm'
 export { CityListCard } from './CityListCard'
 export { CitySearchFormModal } from './CitySearchFormModal'
 export { CitySummary } from './CitySummary'
