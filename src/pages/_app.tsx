@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { staticPath } from '~/utils/$path'
 import { chakraTheme } from '~/features/ui'
 import { NextPage } from 'next'
+import { SWRConfig } from 'swr'
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -21,7 +22,14 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
       <Head>
         <link rel="icon" href={staticPath.favicon_png} />
       </Head>
-      <ChakraProvider theme={chakraTheme}>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
+      <SWRConfig
+        value={{
+          revalidateOnMount: true,
+          revalidateOnFocus: false,
+        }}
+      >
+        <ChakraProvider theme={chakraTheme}>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
+      </SWRConfig>
     </>
   )
 }
