@@ -3,15 +3,15 @@ import { defineController } from './$relay'
 
 export default defineController({ createCity, listCities }, ({ createCity, listCities }) => ({
   get: async ({ query }) => {
-    const cities = await listCities(query)
+    const listedCities = await listCities(query)
     return {
       status: 200,
-      body: { cities: cities.map(cityToResponse) },
+      body: { totalCount: listedCities.totalCount, cities: listedCities.cities.map(cityToResponse) },
     }
   },
   post: {
     handler: async ({ body }) => {
-      const city = await createCity({ ...body, startedAt: new Date(body.startedAt) })
+      const city = await createCity(body)
       return {
         status: 201,
         body: cityToResponse(city),

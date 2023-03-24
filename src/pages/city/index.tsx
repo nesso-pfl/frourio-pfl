@@ -18,6 +18,7 @@ export default function Page() {
     key: () => (getCitiesQuery ? apiClient.authed.city.$path({ query: getCitiesQuery }) : null),
     query: getCitiesQuery,
   })
+  const totalCount = data?.totalCount ?? 0
   const cities = data?.cities
 
   const queryCities = async (formValues: CityQuery) => {
@@ -65,9 +66,13 @@ export default function Page() {
           />
         </Box>
         <Box>
-          <CityListCard totalCount={3} cities={cities} cityQuery={getCitiesQuery} mb={8} />
+          <CityListCard totalCount={totalCount} cities={cities} cityQuery={getCitiesQuery} mb={8} />
           <Center mb={8}>
-            <Pagination currentPage={getCitiesQuery?.page ?? 1} lastPage={10} onChange={handleChangePage} />
+            <Pagination
+              currentPage={getCitiesQuery?.page ?? 1}
+              lastPage={Math.ceil(totalCount / 20)}
+              onChange={handleChangePage}
+            />
           </Center>
         </Box>
       </Grid>
