@@ -15,7 +15,17 @@ export type City = {
   updatedAt: Date
 }
 
-export type CreateCity = Pick<City, 'name' | 'nameKana' | 'category' | 'startedAt'> & { features: string[] }
+export const createCitySchema = z.object({
+  name: z.string().min(1, 'この項目は入力必須です'),
+  nameKana: z
+    .string()
+    .min(1, 'この項目は入力必須です')
+    .regex(/^[ぁ-んー ]+$/, 'ひらがなで入力してください'),
+  category: z.enum(cityCategories, { required_error: 'この項目は入力必須です' }),
+  startedAt: z.string({ required_error: 'この項目は入力必須です' }).datetime(),
+  features: z.string().array().default([]),
+})
+export type CreateCity = z.infer<typeof createCitySchema>
 
 export const cityQueryOrderBies = ['nameKana:asc', 'nameKana:desc', 'startedAt:asc', 'startedAt:desc'] as const
 export type CityQueryOrderBy = (typeof cityQueryOrderBies)[number]

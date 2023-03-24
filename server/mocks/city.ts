@@ -18,7 +18,7 @@ export const mockCreateCity = (option?: CreateOption): CreateCity => ({
   name: '東京',
   nameKana: 'とうきょう',
   category: 'local',
-  startedAt: new Date(2021, 1, 1, 0, 0, 0, 0),
+  startedAt: new Date(2021, 1, 1, 0, 0, 0, 0).toISOString(),
   features: [],
   ...option,
 })
