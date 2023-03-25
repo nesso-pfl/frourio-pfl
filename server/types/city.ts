@@ -1,3 +1,4 @@
+import { AppError } from '$/util/AppError'
 import { z } from 'zod'
 import { CityFeature } from './cityFeature'
 
@@ -14,6 +15,10 @@ export type City = {
   createdAt: Date
   updatedAt: Date
 }
+
+export const createCityErrorCodes = ['unique-name', 'unique-nameKana'] as const
+export type CreateCityErrorCode = (typeof createCityErrorCodes)[number]
+export class CreateCityError extends AppError<CreateCityErrorCode> {}
 
 export const createCitySchema = z.object({
   name: z.string().min(1, 'この項目は入力必須です'),

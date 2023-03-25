@@ -1,4 +1,5 @@
 import { createCity, listCities, cityToResponse } from '$/service/city'
+import { CreateCityError } from '$/types/city'
 import { defineController } from './$relay'
 
 export default defineController({ createCity, listCities }, ({ createCity, listCities }) => ({
@@ -11,10 +12,18 @@ export default defineController({ createCity, listCities }, ({ createCity, listC
   },
   post: {
     handler: async ({ body }) => {
-      const city = await createCity(body)
-      return {
-        status: 201,
-        body: cityToResponse(city),
+      try {
+        const city = await createCity(body)
+        return {
+          status: 201,
+          body: cityToResponse(city),
+        }
+      } catch (error) {
+        if (error instanceof CreateCityError) {
+          return { status: 400, body: error }
+        } else {
+          return { status: 500, body: error }
+        }
       }
     },
   },

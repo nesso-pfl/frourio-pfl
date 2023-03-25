@@ -3,13 +3,14 @@ import { VStack } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import { Button, Datepicker, Form, Input, RadioGroup } from '../ui'
+import { SubmitError } from '../form'
 import { showCategory } from './showCategory'
 import ReactSelect from 'react-select/creatable'
 
 type Props = {
   defaultValues?: Partial<CreateCity>
   isEdit?: boolean
-  onSubmit: (formValues: CreateCity) => Promise<unknown>
+  onSubmit: (formValues: CreateCity) => Promise<SubmitError<CreateCity> | undefined>
 }
 
 export const CityForm: React.FC<Props> = ({ defaultValues, isEdit, onSubmit }) => {
@@ -17,11 +18,19 @@ export const CityForm: React.FC<Props> = ({ defaultValues, isEdit, onSubmit }) =
     register,
     control,
     formState: { errors, isSubmitting },
+    setError,
     handleSubmit,
   } = useForm<CreateCity>({ defaultValues, resolver: zodResolver(createCitySchema) })
 
+  const onSubmit_ = async (formValues: CreateCity) => {
+    const error = await onSubmit(formValues)
+    if (error) {
+      setError(error.field, { message: error.message })
+    }
+  }
+
   return (
-    <Form.Container onSubmit={handleSubmit(onSubmit, (e) => console.log(e))}>
+    <Form.Container onSubmit={handleSubmit(onSubmit_)}>
       <VStack spacing={5} mb={8}>
         <Form.Item isInvalid={!!errors.name?.message}>
           <Form.Label>名前</Form.Label>
