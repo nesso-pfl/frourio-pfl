@@ -37,7 +37,7 @@ export const mockUpdateCity = (option?: UpdateOption): UpdateCity => ({
   name: '東京',
   nameKana: 'とうきょう',
   category: 'local',
-  startedAt: new Date(2021, 1, 1, 0, 0, 0, 0),
+  startedAt: new Date(2021, 1, 1, 0, 0, 0, 0).toISOString(),
   features: ['きれい', '広い'],
   ...option,
 })

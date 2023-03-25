@@ -1,4 +1,12 @@
-export { cityCategories, cityQuerySchema, cityQueryOrderBies, CreateCityError, createCityErrorCodes } from './city'
+export {
+  cityCategories,
+  cityQuerySchema,
+  cityQueryOrderBies,
+  CreateCityError,
+  createCityErrorCodes,
+  UpdateCityError,
+  updateCityErrorCodes,
+} from './city'
 export type {
   City,
   CreateCity,
@@ -7,6 +15,7 @@ export type {
   CityCategory,
   CityQueryOrderBy,
   CreateCityErrorCode,
+  UpdateCityErrorCode,
 } from './city'
 export type { CityFeature, CreateCityFeature, CityFeatureQuery, UpdateCityFeature } from './cityFeature'
 export { CreateUserError, createUserErrorCodes } from './user'

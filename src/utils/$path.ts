@@ -9,6 +9,9 @@ export const pagesPath = {
   },
   "city": {
     _id: (id: string | number) => ({
+      "edit": {
+        $url: (url?: { hash?: string }) => ({ pathname: '/city/[id]/edit' as const, query: { id }, hash: url?.hash })
+      },
       $url: (url?: { hash?: string }) => ({ pathname: '/city/[id]' as const, query: { id }, hash: url?.hash })
     }),
     "new": {

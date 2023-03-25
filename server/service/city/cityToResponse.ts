@@ -23,6 +23,5 @@ export const createCityToResponse = (city: CreateCity): Response<CreateCity> => 
 export const updateCityToResponse = (city: UpdateCity): Response<UpdateCity> => {
   return {
     ...city,
-    startedAt: city.startedAt.toISOString(),
   }
 }

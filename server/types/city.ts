@@ -46,4 +46,8 @@ export const cityQuerySchema = z
   .partial()
 export type CityQuery = z.infer<typeof cityQuerySchema>
 
-export type UpdateCity = Pick<City, 'name' | 'nameKana' | 'category' | 'startedAt'> & { features: string[] }
+export type UpdateCity = CreateCity
+export const updateCityErrorCodes = createCityErrorCodes
+export type UpdateCityErrorCode = CreateCityErrorCode
+
+export class UpdateCityError extends AppError<UpdateCityErrorCode> {}

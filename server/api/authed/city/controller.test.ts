@@ -58,7 +58,7 @@ describe('POST authed/city', () => {
     expect(res.body).toMatchObject(returningData)
   })
 
-  test('名前の重複エラーにより町の作成に失敗したら 400 を返す', async () => {
+  test('名前（かな）の重複エラーにより町の作成に失敗したら 400 を返す', async () => {
     const returningData = new CreateCityError('unique-nameKana')
     const injectedController = controller.inject((deps) => ({
       createCity: deps.createCity.inject(() => ({ create: () => Promise.reject(returningData) })),

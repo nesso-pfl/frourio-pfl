@@ -1,6 +1,7 @@
 import { mockCity, mockUpdateCity } from '$/mocks'
 import { mockAccount } from '$/mocks'
 import { cityToResponse, updateCityToResponse } from '$/service/city'
+import { UpdateCityError } from '$/types'
 import fastify from 'fastify'
 import controller from './controller'
 
@@ -55,6 +56,38 @@ describe('PUT authed/city/_cityId@number', () => {
 
     expect(res.status).toBe(200)
     expect(res.body).toMatchObject(cityToResponse(returningData))
+  })
+
+  test('名前の重複エラーにより町の編集に失敗したら 400 を返す', async () => {
+    const returningData = new UpdateCityError('unique-name')
+    const injectedController = controller.inject((deps) => ({
+      updateCity: deps.updateCity.inject(() => ({ update: () => Promise.reject(returningData) })),
+    }))(fastify())
+
+    const res = await injectedController.put({
+      account: mockAccount(),
+      params: { cityId: 1 },
+      body: updateCityToResponse(mockUpdateCity()),
+    })
+
+    expect(res.status).toBe(400)
+    expect(res.body).toMatchObject(returningData)
+  })
+
+  test('名前（かな）の重複エラーにより町の編集に失敗したら 400 を返す', async () => {
+    const returningData = new UpdateCityError('unique-nameKana')
+    const injectedController = controller.inject((deps) => ({
+      updateCity: deps.updateCity.inject(() => ({ update: () => Promise.reject(returningData) })),
+    }))(fastify())
+
+    const res = await injectedController.put({
+      account: mockAccount(),
+      params: { cityId: 1 },
+      body: updateCityToResponse(mockUpdateCity()),
+    })
+
+    expect(res.status).toBe(400)
+    expect(res.body).toMatchObject(returningData)
   })
 })
 
