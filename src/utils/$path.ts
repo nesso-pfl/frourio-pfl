@@ -8,6 +8,9 @@ export const pagesPath = {
     $url: (url?: { hash?: string }) => ({ pathname: '/auth-action' as const, hash: url?.hash })
   },
   "city": {
+    _id: (id: string | number) => ({
+      $url: (url?: { hash?: string }) => ({ pathname: '/city/[id]' as const, query: { id }, hash: url?.hash })
+    }),
     "new": {
       $url: (url?: { hash?: string }) => ({ pathname: '/city/new' as const, hash: url?.hash })
     },

@@ -1,8 +1,9 @@
-import { Button, DefList, Heading } from '~/features/ui'
+import { Button, DefList, Heading, NextLink } from '~/features/ui'
 import { City, Response } from '$/types'
 import { Box, Flex } from '@chakra-ui/react'
 import { showStartedAt } from './showStartedAt'
 import { CityCategoryBadge } from './CityCategoryBadge'
+import { pagesPath } from '@/src/utils/$path'
 
 type Props = {
   city: Response<City>
@@ -16,9 +17,9 @@ export const CitySummary: React.FC<Props> = ({ city }) => {
           {city.name}
         </Heading>
         <CityCategoryBadge category={city.category} />
-        <Button variant="secondary" ml="auto">
-          詳細を見る
-        </Button>
+        <NextLink href={pagesPath.city._id(city.id).$url()} ml="auto">
+          <Button variant="secondary">詳細を見る</Button>
+        </NextLink>
       </Flex>
       <DefList
         fontSize="sm"
