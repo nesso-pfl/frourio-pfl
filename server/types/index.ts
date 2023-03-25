@@ -1,4 +1,4 @@
-export { cityCategories, cityQuerySchema, cityQueryOrderBies, createCityErrorCodes } from './city'
+export { cityCategories, cityQuerySchema, cityQueryOrderBies, CreateCityError, createCityErrorCodes } from './city'
 export type {
   City,
   CreateCity,
