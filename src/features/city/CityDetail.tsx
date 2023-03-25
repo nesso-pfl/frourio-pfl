@@ -21,11 +21,13 @@ export const CityDetail: React.FC<Props> = ({ city, onDeleteCity }) => {
 
   return (
     <Box as="article">
-      <Flex align="center" mb={3}>
-        <Heading as="h3" fontSize="lg" mr={3}>
-          {city.name}
-        </Heading>
-        <CityCategoryBadge category={city.category} />
+      <Flex mb={3}>
+        <Box>
+          <CityCategoryBadge category={city.category} />
+          <Heading as="h3" fontSize="lg" mt={1}>
+            {city.name}
+          </Heading>
+        </Box>
         <NextLink href={pagesPath.city._id(city.id).edit.$url()} ml="auto">
           <Button as="span">編集</Button>
         </NextLink>

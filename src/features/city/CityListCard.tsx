@@ -14,8 +14,8 @@ export const CityListCard: React.FC<Props> = ({ cityQuery, totalCount, cities, .
   const cityQueryOrderBy = cityQuery?.orderBy ?? 'nameKana:asc'
   return (
     <Card.Container {...restProps}>
-      <Card.Body py={8}>
-        <Flex borderBottomWidth="1px" borderBottomColor="gray.200" mb={4}>
+      <Card.Body>
+        <Flex borderBottomWidth="1px" borderBottomColor="gray.200" mb={8}>
           <Flex align="center" fontSize="sm" mr={3}>
             検索結果:{totalCount?.toLocaleString()}件
           </Flex>
@@ -45,7 +45,7 @@ export const CityListCard: React.FC<Props> = ({ cityQuery, totalCount, cities, .
         ) : (
           <VStack spacing={5} divider={<Divider color="gray.50" />}>
             {cities?.map((city) => (
-              <Container key={city.id}>
+              <Container key={city.id} px={0}>
                 <CitySummary city={city} />
               </Container>
             ))}

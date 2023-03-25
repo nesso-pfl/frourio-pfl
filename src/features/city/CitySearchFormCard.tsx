@@ -2,7 +2,7 @@ import { cityCategories, CityQuery, cityQuerySchema } from '@/server/types'
 import { VStack } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
-import { Button, Card, CheckboxGroup, Form, Input } from '../ui'
+import { Button, Card, CheckboxGroup, Form, Heading, Input } from '../ui'
 import { showCategory } from './showCategory'
 
 type Props = {
@@ -21,6 +21,7 @@ export const CitySearchFormCard: React.FC<Props> = ({ defaultValues, onSubmit })
   return (
     <Card.Container>
       <Card.Body>
+        <Heading variant="cardTitle">絞り込み</Heading>
         <Form.Container onSubmit={handleSubmit(onSubmit)}>
           <VStack spacing={5} mb={8}>
             <Form.Item isInvalid={!!errors.nameOrNameKana?.message}>

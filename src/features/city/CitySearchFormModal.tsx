@@ -1,9 +1,11 @@
-import { Button, CheckboxGroup, Form, Input, Modal } from '~/features/ui'
+import { Button, CheckboxGroup, Form, Input, Modal, NextLink } from '~/features/ui'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Box, Flex, useDisclosure, VStack } from '@chakra-ui/react'
 import { cityCategories, CityQuery, cityQuerySchema } from '@/server/types'
 import { showCategory } from './showCategory'
+import { pagesPath } from '@/src/utils/$path'
+import { CitySearchTags } from './CitySearchTags'
 
 type Props = {
   defaultValues?: Partial<CityQuery>
@@ -26,10 +28,18 @@ export const CitySearchFormModal: React.FC<Props> = ({ defaultValues, onSubmit }
 
   return (
     <Box>
-      <Flex align="center" gap={2}>
-        <Button variant="secondary" onClick={searchModal.onOpen}>
-          絞り込み
-        </Button>
+      <Flex>
+        <Box>
+          <Button variant="secondary" onClick={searchModal.onOpen} mb={3}>
+            絞り込み
+          </Button>
+          <CitySearchTags formValues={defaultValues} />
+        </Box>
+        <NextLink href={pagesPath.city.new.$url()} ml="auto">
+          <Button as="span" w="100%">
+            新規作成
+          </Button>
+        </NextLink>
       </Flex>
       <Modal {...searchModal}>
         <Form.Container gap={5} onSubmit={handleSubmit(onSubmit_)}>

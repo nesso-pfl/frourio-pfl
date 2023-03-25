@@ -20,8 +20,10 @@ export default function Page() {
           { href: pagesPath.city.new.$url(), label: '町作成' },
         ]}
       />
-      <Container pt={[12, 32]} px={0} centerContent>
-        <Heading variant="pageTitle">町作成</Heading>
+      <Container pt={[5, 32]} px={0} centerContent>
+        <Heading variant="pageTitle" mb={5}>
+          町作成
+        </Heading>
         <Card.Container minW={['100%', '450px']}>
           <Card.Body>
             <CityForm onSubmit={createCity} />
