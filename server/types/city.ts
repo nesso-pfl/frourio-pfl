@@ -12,8 +12,8 @@ export type City = {
   category: CityCategory
   startedAt: Date
   features: CityFeature[]
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
 }
 
 export const createCityErrorCodes = ['unique-name', 'unique-nameKana'] as const
