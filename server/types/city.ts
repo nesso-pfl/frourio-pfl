@@ -1,4 +1,4 @@
-import { AppError } from '$/util/AppError'
+import { AppError } from './utils'
 import { z } from 'zod'
 import { CityFeature } from './cityFeature'
 
