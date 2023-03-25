@@ -26,7 +26,7 @@ export const CityDetail: React.FC<Props> = ({ city, onDeleteCity }) => {
           {city.name}
         </Heading>
         <CityCategoryBadge category={city.category} />
-        <NextLink href={pagesPath.city._id(city.id).$url()} ml="auto">
+        <NextLink href={pagesPath.city._id(city.id).edit.$url()} ml="auto">
           <Button as="span">編集</Button>
         </NextLink>
         <Button variant="error" ml={2} onClick={deleteModal.onOpen}>

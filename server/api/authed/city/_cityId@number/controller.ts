@@ -1,4 +1,5 @@
 import { findCity, cityToResponse, updateCity, deleteCity } from '$/service/city'
+import { UpdateCityError } from '$/types/city'
 import { defineController } from './$relay'
 
 export default defineController({ findCity, updateCity, deleteCity }, ({ findCity, updateCity, deleteCity }) => ({
@@ -7,8 +8,16 @@ export default defineController({ findCity, updateCity, deleteCity }, ({ findCit
     return !city ? { status: 404 } : { status: 200, body: cityToResponse(city) }
   },
   put: async ({ params, body }) => {
-    const city = await updateCity(params.cityId, { ...body, startedAt: new Date(body.startedAt) })
-    return { status: 200, body: cityToResponse(city) }
+    try {
+      const city = await updateCity(params.cityId, body)
+      return { status: 200, body: cityToResponse(city) }
+    } catch (error) {
+      if (error instanceof UpdateCityError) {
+        return { status: 400, body: error }
+      } else {
+        return { status: 500, body: error }
+      }
+    }
   },
   delete: async ({ params }) => {
     await deleteCity(params.cityId)
