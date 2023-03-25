@@ -11,7 +11,11 @@ const update = async (id: number, params: UpdateCity) => {
     data: {
       ...restParams,
       features: {
-        connectOrCreate: features.map((feature) => ({ create: { name: feature }, where: { name: feature } })),
+        set: [],
+        connectOrCreate: features.map((feature) => ({
+          create: { name: feature },
+          where: { name: feature },
+        })),
       },
     },
     include: { features: true },
