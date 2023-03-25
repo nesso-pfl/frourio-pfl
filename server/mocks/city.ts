@@ -1,4 +1,13 @@
-import { City, CreateCity, UpdateCity } from '$/types'
+import { City, CityFeature, CreateCity, UpdateCity } from '$/types'
+
+type FeatureOption = Partial<CityFeature>
+const mockCityFeature = (option?: FeatureOption): CityFeature => ({
+  id: 1,
+  name: '広い',
+  createdAt: new Date(2023, 1, 1, 0, 0, 0, 0),
+  updatedAt: new Date(2023, 1, 1, 0, 0, 0, 0),
+  ...option,
+})
 
 type Option = Partial<City>
 export const mockCity = (option?: Option): City => ({
@@ -7,7 +16,7 @@ export const mockCity = (option?: Option): City => ({
   nameKana: 'とうきょう',
   category: 'local',
   startedAt: new Date(2021, 1, 1, 0, 0, 0, 0),
-  features: [],
+  features: [mockCityFeature({ name: 'きれい' }), mockCityFeature({ name: '広い' })],
   createdAt: new Date(2023, 1, 1, 0, 0, 0, 0),
   updatedAt: new Date(2023, 1, 1, 0, 0, 0, 0),
   ...option,
@@ -19,7 +28,7 @@ export const mockCreateCity = (option?: CreateOption): CreateCity => ({
   nameKana: 'とうきょう',
   category: 'local',
   startedAt: new Date(2021, 1, 1, 0, 0, 0, 0).toISOString(),
-  features: [],
+  features: ['きれい', '広い'],
   ...option,
 })
 
@@ -29,6 +38,6 @@ export const mockUpdateCity = (option?: UpdateOption): UpdateCity => ({
   nameKana: 'とうきょう',
   category: 'local',
   startedAt: new Date(2021, 1, 1, 0, 0, 0, 0),
-  features: [],
+  features: ['きれい', '広い'],
   ...option,
 })
