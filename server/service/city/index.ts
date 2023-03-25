@@ -1,4 +1,4 @@
-export { createCity } from './createCity'
+export { createCity, CreateCityError } from './createCity'
 export { findCity } from './findCity'
 export { listCities } from './listCities'
 export { updateCity } from './updateCity'

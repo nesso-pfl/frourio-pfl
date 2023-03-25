@@ -1,8 +1,9 @@
 import { depend } from 'velona'
 import { prisma } from '$/lib/prisma'
-import { CreateCity, City } from '$/types'
-import { CreateCityError } from '$/types/city'
+import { CreateCity, City, AppError, CreateCityErrorCode } from '$/types'
 import { prismaValidationErrorSchema } from '$/util/prismaValidationErrorSchema'
+
+export class CreateCityError extends AppError<CreateCityErrorCode> {}
 
 const create = async (newCity: CreateCity) => {
   const { features, ...restData } = newCity

@@ -2,7 +2,6 @@ export {
   cityCategories,
   cityQuerySchema,
   cityQueryOrderBies,
-  CreateCityError,
   createCityErrorCodes,
   UpdateCityError,
   updateCityErrorCodes,
