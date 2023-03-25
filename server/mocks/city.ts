@@ -17,8 +17,8 @@ export const mockCity = (option?: Option): City => ({
   category: 'local',
   startedAt: new Date(2021, 1, 1, 0, 0, 0, 0),
   features: [mockCityFeature({ name: 'きれい' }), mockCityFeature({ name: '広い' })],
-  createdAt: new Date(2023, 1, 1, 0, 0, 0, 0).toISOString(),
-  updatedAt: new Date(2023, 1, 1, 0, 0, 0, 0).toISOString(),
+  createdAt: new Date(2023, 1, 1, 0, 0, 0, 0),
+  updatedAt: new Date(2023, 1, 1, 0, 0, 0, 0),
   ...option,
 })
 

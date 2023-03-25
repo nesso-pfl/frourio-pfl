@@ -1,8 +1,9 @@
 import { depend } from 'velona'
-import { City, UpdateCity } from '$/types'
+import { AppError, City, UpdateCity, UpdateCityErrorCode } from '$/types'
 import { prisma } from '$/lib/prisma'
 import { prismaValidationErrorSchema } from '$/util/prismaValidationErrorSchema'
-import { UpdateCityError } from '$/types/city'
+
+export class UpdateCityError extends AppError<UpdateCityErrorCode> {}
 
 const update = async (id: number, params: UpdateCity) => {
   const { features, ...restParams } = params
