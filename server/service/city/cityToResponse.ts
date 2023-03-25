@@ -4,8 +4,11 @@ export const cityToResponse = (city: City): Response<City> => {
   return {
     ...city,
     startedAt: city.startedAt.toISOString(),
-    // TODO: cityFeatureToResponse を使う
-    features: [],
+    features: city.features.map((feature) => ({
+      ...feature,
+      createdAt: feature.createdAt.toISOString(),
+      updatedAt: feature.updatedAt.toISOString(),
+    })),
     createdAt: city.createdAt.toISOString(),
     updatedAt: city.updatedAt.toISOString(),
   }
