@@ -1,6 +1,8 @@
 import { depend } from 'velona'
 import { prisma } from '$/lib/prisma'
 import { CreateCity, City } from '$/types'
+import { CreateCityError } from '$/types/city'
+import { prismaValidationErrorSchema } from '$/util/prismaValidationErrorSchema'
 
 const create = async (newCity: CreateCity) => {
   const { features, ...restData } = newCity
@@ -15,5 +17,17 @@ const create = async (newCity: CreateCity) => {
   })
 }
 export const createCity = depend({ create }, async ({ create }, newCity: CreateCity): Promise<City> => {
-  return await create(newCity)
+  try {
+    return await create(newCity)
+  } catch (error) {
+    const result = prismaValidationErrorSchema.safeParse(error)
+    if (!result.success) throw error
+    if (result.data.meta.target?.includes('name')) {
+      throw new CreateCityError('unique-name')
+    } else if (result.data.meta.target?.includes('nameKana')) {
+      throw new CreateCityError('unique-nameKana')
+    } else {
+      throw error
+    }
+  }
 })

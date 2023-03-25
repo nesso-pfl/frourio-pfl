@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { CreateCity } from '@/server/types'
 import { CityForm } from '@/src/features/city'
 import { useToast } from '@chakra-ui/react'
+import { CreateCityError } from '@/server/types/city'
+import { AxiosError } from 'axios'
 
 export default function Page() {
   const router = useRouter()
@@ -17,8 +19,17 @@ export default function Page() {
       await apiClient.authed.city.$post({ body: formValues })
       await router.push(pagesPath.city.$url())
       successToast({ description: '町を作成しました。' })
-    } catch {
-      errorToast({ description: '町の作成に失敗しました。しばらく待ってから再度お試しください。' })
+    } catch (error) {
+      if (error instanceof AxiosError<CreateCityError>) {
+        switch (error.response?.data.code) {
+          case 'unique-name':
+            return { field: 'name', message: 'この名前は既に使われています' } as const
+          case 'unique-nameKana':
+            return { field: 'nameKana', message: 'この名前は既に使われています' } as const
+        }
+      } else {
+        errorToast({ description: '町の作成に失敗しました。しばらく待ってから再度お試しください。' })
+      }
     }
   }
 
