@@ -1,4 +1,3 @@
-import { AppError } from './utils'
 import { z } from 'zod'
 import { CityFeature } from './cityFeature'
 
@@ -12,8 +11,8 @@ export type City = {
   category: CityCategory
   startedAt: Date
   features: CityFeature[]
-  createdAt: string
-  updatedAt: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export const createCityErrorCodes = ['unique-name', 'unique-nameKana'] as const
@@ -48,5 +47,3 @@ export type CityQuery = z.infer<typeof cityQuerySchema>
 export type UpdateCity = CreateCity
 export const updateCityErrorCodes = createCityErrorCodes
 export type UpdateCityErrorCode = CreateCityErrorCode
-
-export class UpdateCityError extends AppError<UpdateCityErrorCode> {}

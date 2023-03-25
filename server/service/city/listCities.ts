@@ -1,6 +1,6 @@
 import { prisma } from '$/lib/prisma'
 import { depend } from 'velona'
-import { CityQuery } from '$/types'
+import { City, CityQuery } from '$/types'
 import { Prisma } from '@prisma/client'
 
 const queryToWhereClause = (query?: CityQuery): Prisma.CityWhereInput => {
@@ -56,7 +56,7 @@ const findMany = async (query?: CityQuery) => {
 }
 export const listCities = depend(
   { getTotalCount, findMany },
-  async ({ getTotalCount, findMany }, query?: CityQuery) => {
+  async ({ getTotalCount, findMany }, query?: CityQuery): Promise<{ totalCount: number; cities: City[] }> => {
     const totalCount = await getTotalCount(query)
     const cities = await findMany(query)
 
