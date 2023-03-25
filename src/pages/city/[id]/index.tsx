@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import { pagesPath } from '~/utils/$path'
-import { Center, Spinner, useToast } from '@chakra-ui/react'
+import { Center, Spinner } from '@chakra-ui/react'
 import { AuthCheck } from '~/features/account'
 import { Layout, Breadcrumb, Heading, Card } from '~/features/ui'
 import useAspidaSWR from '@aspida/swr'
 import { apiClient } from '@/src/utils/apiClient'
 import { useRouter } from 'next/router'
-import { CityDetail } from '@/src/features/city'
+import { CityDetail, useDeleteCity } from '@/src/features/city'
 
 export default function Page() {
   const router = useRouter()
@@ -16,17 +16,7 @@ export default function Page() {
     key: () => (cityId ? apiClient.authed.city._cityId(cityId).$path() : null),
   })
 
-  const successToast = useToast()
-  const errorToast = useToast({ status: 'error' })
-  const deleteCity = async () => {
-    try {
-      if (cityId === undefined) throw new Error('cityId should be defined.')
-      apiClient.authed.city._cityId(cityId).$delete()
-      successToast({ description: '町を削除しました' })
-    } catch {
-      errorToast({ description: '町の削除に失敗しました。しばらく待ってから再度お試しください。' })
-    }
-  }
+  const { deleteCity } = useDeleteCity(cityId)
 
   return (
     <>
