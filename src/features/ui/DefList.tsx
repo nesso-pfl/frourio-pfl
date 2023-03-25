@@ -11,9 +11,9 @@ type Props = {
   items: DefItem[]
 } & GridProps
 
-export const DefList = forwardRef<Props, 'dl'>(({ items }, ref) => {
+export const DefList = forwardRef<Props, 'dl'>(({ items, ...restProps }, ref) => {
   return (
-    <Grid as="dl" ref={ref} templateColumns="auto 1fr" columnGap={2}>
+    <Grid as="dl" ref={ref} templateColumns="auto 1fr" columnGap={2} {...restProps}>
       {items.map(({ key, term, desc }) => (
         <React.Fragment key={key}>
           <GridItem as="dt" display="flex" alignItems="center">

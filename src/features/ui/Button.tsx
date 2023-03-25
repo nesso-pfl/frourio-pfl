@@ -6,7 +6,7 @@ import {
   forwardRef,
 } from '@chakra-ui/react'
 
-const variants = ['primary', 'primaryOutline', 'secondary', 'disabled'] as const
+const variants = ['primary', 'primaryOutline', 'secondary', 'error', 'gray', 'disabled'] as const
 type Variant = (typeof variants)[number]
 
 const variantStyleMap: Record<Variant, ButtonProps> = {
@@ -20,6 +20,14 @@ const variantStyleMap: Record<Variant, ButtonProps> = {
   },
   secondary: {
     bg: 'secondary',
+    color: 'white',
+  },
+  error: {
+    bg: 'error',
+    color: 'white',
+  },
+  gray: {
+    bg: 'gray.500',
     color: 'white',
   },
   disabled: {
