@@ -1,6 +1,5 @@
 import { mockAccount, mockCity, mockCreateCity } from '$/mocks'
-import { cityToResponse, createCityToResponse } from '$/service/city'
-import { CreateCityError } from '$/types'
+import { cityToResponse, CreateCityError, createCityToResponse } from '$/service/city'
 import fastify from 'fastify'
 import controller from './controller'
 

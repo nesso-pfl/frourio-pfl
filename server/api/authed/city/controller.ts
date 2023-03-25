@@ -1,5 +1,4 @@
-import { createCity, listCities, cityToResponse } from '$/service/city'
-import { CreateCityError } from '$/types/city'
+import { createCity, listCities, cityToResponse, CreateCityError } from '$/service/city'
 import { defineController } from './$relay'
 
 export default defineController({ createCity, listCities }, ({ createCity, listCities }) => ({
