@@ -1,2 +1,2 @@
-export { createAccount, CreateAccountError } from './createAccount'
+export { createAccount } from './createAccount'
 export { deleteAccount } from './deleteAccount'

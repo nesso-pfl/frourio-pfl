@@ -1,5 +1,6 @@
-import { createAccount, CreateAccountError, deleteAccount } from '$/service/account'
-import { createUser, CreateUserError } from '$/service/user'
+import { createAccount, deleteAccount } from '$/service/account'
+import { createUser } from '$/service/user'
+import { CreateAccountError, CreateUserError } from '$/types'
 import { defineController } from './$relay'
 
 export default defineController(

@@ -1,10 +1,8 @@
 import { depend } from 'velona'
 import { prisma } from '$/lib/prisma'
-import { CreateUser, CreateUserErrorCode, createUserErrorCodes, User } from '$/types'
+import { CreateUserError, CreateUser, createUserErrorCodes, User } from '$/types'
 import { z } from 'zod'
-import { AppError } from '$/util/AppError'
 
-export class CreateUserError extends AppError<CreateUserErrorCode> {}
 const errorSchema = z.object({
   code: z.enum(createUserErrorCodes),
 })

@@ -1,6 +1,5 @@
 import { mockCreateAccount, mockUser } from '$/mocks'
-import { CreateAccountError } from '$/service/account'
-import { CreateUserError } from '$/service/user'
+import { CreateAccountError, CreateUserError } from '$/types'
 import fastify from 'fastify'
 import controller from './controller'
 

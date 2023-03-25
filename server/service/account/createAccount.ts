@@ -2,10 +2,7 @@ import { depend } from 'velona'
 import { createFirebaseAdminUser } from '$/lib/firebase'
 import { z } from 'zod'
 import { Account, CreateAccount } from '$/types'
-import { CreateAccountErrorCode, createAccountErrorCodes } from '$/types/account'
-import { AppError } from '$/util/AppError'
-
-export class CreateAccountError extends AppError<CreateAccountErrorCode> {}
+import { CreateAccountError, createAccountErrorCodes } from '$/types'
 
 const errorSchema = z.object({
   code: z.enum(createAccountErrorCodes),
