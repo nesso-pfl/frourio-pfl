@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { pagesPath } from '~/utils/$path'
-import { Box, Center, Grid } from '@chakra-ui/react'
+import { Box, Center, Grid, VStack } from '@chakra-ui/react'
 import { AuthCheck } from '~/features/account'
-import { Layout, Breadcrumb, Heading, Pagination } from '~/features/ui'
+import { Layout, Breadcrumb, Heading, Pagination, Card, Button, NextLink } from '~/features/ui'
 import useAspidaSWR from '@aspida/swr'
 import { apiClient } from '@/src/utils/apiClient'
 import { useRouter } from 'next/router'
@@ -47,7 +47,17 @@ export default function Page() {
       />
       <Heading variant="pageTitle">町一覧</Heading>
       <Grid gap={5} templateColumns={['auto', '1fr 3fr']} templateRows={['auto auto', 'auto']}>
-        <Box display={['none', 'block']} minW={['auto', '280px']}>
+        <VStack display={['none', 'block']} minW={['auto', '280px']} spacing={5}>
+          <Card.Container>
+            <Card.Body>
+              <Heading variant="cardTitle">町を新規作成</Heading>
+              <NextLink href={pagesPath.city.new.$url()}>
+                <Button as="span" size="md" w="100%">
+                  新規作成
+                </Button>
+              </NextLink>
+            </Card.Body>
+          </Card.Container>
           <CitySearchFormCard
             // defaultValues が変更される度に Form を remount しないと Form に defaultValues が反映されない
             // ref: https://react-hook-form.com/faqs/#Whyisdefaultvaluenotchangingcorrectlywithternaryoperator
@@ -55,7 +65,7 @@ export default function Page() {
             defaultValues={getCitiesQuery}
             onSubmit={queryCities}
           />
-        </Box>
+        </VStack>
         <Box display={['block', 'none']}>
           <CitySearchFormModal
             // defaultValues が変更される度に Form を remount しないと Form に defaultValues が反映されない

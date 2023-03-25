@@ -31,8 +31,10 @@ export default function Page() {
           { href: pagesPath.city._id(cityId as number).edit.$url(), label: '町編集' },
         ]}
       />
-      <Container pt={[12, 32]} px={0} centerContent>
-        <Heading variant="pageTitle">町編集</Heading>
+      <Container pt={[5, 32]} px={0} centerContent>
+        <Heading variant="pageTitle" mb={5}>
+          町編集
+        </Heading>
         <Card.Container minW={['100%', '450px']}>
           <Card.Body>
             <CityForm

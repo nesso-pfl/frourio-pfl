@@ -33,7 +33,7 @@ export default function Page() {
       />
       <Heading variant="pageTitle">町詳細</Heading>
       <Card.Container flex={1} mb={12}>
-        <Card.Body py={8}>
+        <Card.Body>
           {city ? (
             <CityDetail city={city} onDeleteCity={deleteCity} />
           ) : (
