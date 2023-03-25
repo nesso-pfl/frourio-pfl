@@ -20,8 +20,8 @@ export default function Page() {
       await router.push(pagesPath.city.$url())
       successToast({ description: '町を作成しました。' })
     } catch (error) {
-      if (error instanceof AxiosError<CreateCityError>) {
-        switch (error.response?.data.code) {
+      if (error instanceof AxiosError && error.response?.data instanceof CreateCityError) {
+        switch (error.response.data.code) {
           case 'unique-name':
             return { field: 'name', message: 'この名前は既に使われています' } as const
           case 'unique-nameKana':

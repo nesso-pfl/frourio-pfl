@@ -11,6 +11,7 @@ type Props = {
 } & Omit<React.ComponentProps<typeof Card.Container>, 'children'>
 
 export const CityListCard: React.FC<Props> = ({ cityQuery, totalCount, cities, ...restProps }) => {
+  const cityQueryOrderBy = cityQuery?.orderBy ?? 'nameKana:asc'
   return (
     <Card.Container {...restProps}>
       <Card.Body py={8}>
@@ -30,8 +31,8 @@ export const CityListCard: React.FC<Props> = ({ cityQuery, totalCount, cities, .
               },
             ]}
             itemProps={(link) => ({
-              color: cityQuery?.orderBy === link.href.query?.orderBy ? 'primary' : 'initial',
-              borderBottomColor: cityQuery?.orderBy === link.href.query?.orderBy ? 'primary' : 'transparent',
+              color: cityQueryOrderBy === link.href.query?.orderBy ? 'primary' : 'initial',
+              borderBottomColor: cityQueryOrderBy === link.href.query?.orderBy ? 'primary' : 'transparent',
             })}
           />
         </Flex>
