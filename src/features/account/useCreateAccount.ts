@@ -16,7 +16,6 @@ export const useCreateAccount = depend(
   { createUserAndSendEmailVerification },
   ({ createUserAndSendEmailVerification }) => {
     const router = useRouter()
-    const successToast = useToast()
     const errorToast = useToast({ status: 'error' })
 
     const createAccount = useCallback(
@@ -50,7 +49,7 @@ export const useCreateAccount = depend(
           }
         }
       },
-      [successToast, errorToast],
+      [errorToast, router, createUserAndSendEmailVerification],
     )
 
     return { createAccount }

@@ -13,7 +13,7 @@ export default function Page() {
       await sendPasswordResetEmail(formValues.email)
       await router.push(pagesPath.password_reset.complete.$url())
     },
-    [sendPasswordResetEmail],
+    [router],
   )
   return (
     <>

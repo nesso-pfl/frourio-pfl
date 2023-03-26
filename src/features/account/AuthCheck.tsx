@@ -24,7 +24,7 @@ export const AuthCheck: React.FC<Props> = ({ children }) => {
       hasRedirected.current = true
       router.replace(pagesPath.login.$url())
     }
-  }, [router])
+  }, [router, error])
 
   return data ? (
     <>{children}</>

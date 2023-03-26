@@ -29,12 +29,15 @@ export const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     setError,
     handleSubmit,
   } = useForm<Form>({ resolver: zodResolver(formSchema) })
-  const onSubmit_ = useCallback(async (formValues: Form) => {
-    const error = await onSubmit(formValues)
-    if (error) {
-      setError(error.field, { message: error.message })
-    }
-  }, [])
+  const onSubmit_ = useCallback(
+    async (formValues: Form) => {
+      const error = await onSubmit(formValues)
+      if (error) {
+        setError(error.field, { message: error.message })
+      }
+    },
+    [onSubmit, setError],
+  )
 
   return (
     <Form.Container onSubmit={handleSubmit(onSubmit_)} minW="300px">

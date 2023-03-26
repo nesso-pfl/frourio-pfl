@@ -56,7 +56,7 @@ export const useLogin = () => {
         }
       }
     },
-    [errorToast],
+    [errorToast, successToast],
   )
 
   return { login }

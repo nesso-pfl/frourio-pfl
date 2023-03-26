@@ -29,7 +29,7 @@ export const PasswordResetForm: React.FC<Props> = ({ onSubmit }) => {
         setError(result.field, { message: result.message })
       }
     },
-    [onSubmit],
+    [onSubmit, setError],
   )
 
   return (
