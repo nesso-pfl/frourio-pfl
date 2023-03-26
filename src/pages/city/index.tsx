@@ -4,10 +4,10 @@ import { Box, Center, Grid, VStack } from '@chakra-ui/react'
 import { AuthCheck } from '~/features/account'
 import { Layout, Breadcrumb, Heading, Pagination, Card, Button, NextLink } from '~/features/ui'
 import useAspidaSWR from '@aspida/swr'
-import { apiClient } from '@/src/utils/apiClient'
+import { apiClient } from '~/utils/apiClient'
 import { useRouter } from 'next/router'
-import { CityQuery, cityQuerySchema } from '@/server/types'
-import { CityListCard, CitySearchFormCard, CitySearchFormModal } from '@/src/features/city'
+import { CityQuery, cityQuerySchema } from '$/types'
+import { CityListCard, CitySearchFormCard, CitySearchFormModal } from '~/features/city'
 
 export type OptionalQuery = CityQuery
 
