@@ -13,7 +13,7 @@ export const PasswordReset: React.FC<Props> = ({ code }) => {
   return (
     <Layout>
       <Head>
-        <title>パスワード再設定 | Frourio-pfl</title>
+        <title>パスワード再設定 | Frourio Pfl</title>
       </Head>
       <Container pt={[12, 32]} centerContent>
         <Heading variant="pageTitle">パスワード再設定</Heading>
