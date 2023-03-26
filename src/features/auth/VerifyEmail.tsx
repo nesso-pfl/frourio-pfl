@@ -62,7 +62,7 @@ export const VerifyEmail: React.FC<Props> = ({ code }) => {
       return (
         <Layout>
           <Head>
-            <title>メールアドレス確認完了 | Frourio-pfl</title>
+            <title>メールアドレス確認完了 | Frourio Pfl</title>
           </Head>
           <Center flexDirection="column" pt="10vh">
             <Heading fontSize="xl" textAlign="center" mb="25px">
