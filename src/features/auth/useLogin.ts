@@ -1,7 +1,9 @@
 import { sendEmailVerification, SendEmailVerificationError, signin, SigninError } from '@/src/lib/firebase'
 import { auth } from '@/src/lib/firebase/auth'
+import { pagesPath } from '@/src/utils/$path'
 import { apiClient } from '@/src/utils/apiClient'
 import { useToast } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import { errorMessage } from '../form'
 
@@ -11,6 +13,7 @@ type Args = {
 }
 
 export const useLogin = () => {
+  const router = useRouter()
   const successToast = useToast()
   const errorToast = useToast({ status: 'error' })
   const login = useCallback(
@@ -27,6 +30,7 @@ export const useLogin = () => {
           return
         }
         await apiClient.public.login.$post({ body: { firebaseIdToken: await firebaseUser.getIdToken() } })
+        await router.push(pagesPath.$url())
       } catch (error) {
         if (error instanceof SigninError) {
           switch (error.code) {
@@ -56,7 +60,7 @@ export const useLogin = () => {
         }
       }
     },
-    [errorToast, successToast],
+    [errorToast, successToast, router],
   )
 
   return { login }

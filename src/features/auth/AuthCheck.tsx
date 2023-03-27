@@ -13,11 +13,11 @@ const redirectPathMap: Record<AuthState, UrlObject> = {
 }
 
 type Props = {
-  requiredAuth?: AuthState
+  requiredAuth: AuthState
   children: React.ReactNode
 }
 
-export const AuthCheck: React.FC<Props> = ({ children, requiredAuth = 'loggingIn' }) => {
+export const AuthCheck: React.FC<Props> = ({ children, requiredAuth }) => {
   const router = useRouter()
   const { data, error } = useAspidaSWR(apiClient.authed.account.me, {
     errorRetryCount: 0,
