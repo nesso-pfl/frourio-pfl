@@ -30,6 +30,8 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env.production.aws.local
+.env.production.render.com.local
 
 # server
 server/**/$*.ts
