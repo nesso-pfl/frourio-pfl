@@ -2,8 +2,7 @@ import Head from 'next/head'
 import { pagesPath } from '~/utils/$path'
 import { Box, Center, Grid, VStack } from '@chakra-ui/react'
 import { Breadcrumb, Heading, Pagination, Card, Button, NextLink } from '~/features/ui'
-import { AuthCheck } from '~/features/auth'
-import { Layout } from '~/features/layout'
+import { LoggedInLayout } from '~/features/layout'
 import useAspidaSWR from '@aspida/swr'
 import { apiClient } from '~/utils/apiClient'
 import { useRouter } from 'next/router'
@@ -92,9 +91,5 @@ export default function Page() {
 }
 
 Page.getLayout = (page: React.ReactElement) => {
-  return (
-    <AuthCheck>
-      <Layout>{page}</Layout>
-    </AuthCheck>
-  )
+  return <LoggedInLayout>{page}</LoggedInLayout>
 }

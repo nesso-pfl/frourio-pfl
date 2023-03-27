@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { pagesPath } from '~/utils/$path'
-import { AuthCheck } from '~/features/auth'
 import { Breadcrumb, Heading, Container, Card } from '~/features/ui'
-import { Layout } from '~/features/layout'
+import { LoggedInLayout } from '~/features/layout'
 import { apiClient } from '@/src/utils/apiClient'
 import { useRouter } from 'next/router'
 import { CityForm, useUpdateCity } from '@/src/features/city'
@@ -54,9 +53,5 @@ export default function Page() {
 }
 
 Page.getLayout = (page: React.ReactElement) => {
-  return (
-    <AuthCheck>
-      <Layout>{page}</Layout>
-    </AuthCheck>
-  )
+  return <LoggedInLayout>{page}</LoggedInLayout>
 }
