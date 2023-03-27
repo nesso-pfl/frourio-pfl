@@ -26,7 +26,7 @@ export const LoggedInLayout: React.FC<Props> = ({ children }) => {
               Frourio Pfl
             </Box>
             <Box ml="auto">
-              <Button variant="error" onClick={logout}>
+              <Button variant="errorLight" onClick={logout}>
                 ログアウト
               </Button>
             </Box>

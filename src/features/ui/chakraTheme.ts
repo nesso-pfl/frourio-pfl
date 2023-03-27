@@ -11,6 +11,7 @@ export const chakraTheme = extendTheme({
       secondary: 'green.400',
       secondaryLight: 'green.50',
       error: 'red.400',
+      errorLight: 'red.300',
     },
   },
 })
