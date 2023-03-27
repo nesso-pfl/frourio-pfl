@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react'
-import { Container, Heading, Layout } from '~/features/ui'
+import { Container, Heading } from '~/features/ui'
+import { Layout } from '~/features/layout'
 import Head from 'next/head'
 
 export default function Page() {

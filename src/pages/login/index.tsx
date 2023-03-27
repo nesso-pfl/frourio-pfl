@@ -3,7 +3,8 @@ import { Box, Link } from '@chakra-ui/react'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { LoginForm, useLogin } from '~/features/auth'
-import { Card, Container, Heading, Layout } from '~/features/ui'
+import { Card, Container, Heading } from '~/features/ui'
+import { Layout } from '~/features/layout'
 
 function Login() {
   const { login } = useLogin()

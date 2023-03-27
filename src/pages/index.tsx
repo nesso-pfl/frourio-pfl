@@ -1,5 +1,5 @@
 import { AuthCheck } from '~/features/auth'
-import { Layout } from '~/features/ui'
+import { Layout } from '~/features/layout'
 
 function Home() {
   return <>home</>

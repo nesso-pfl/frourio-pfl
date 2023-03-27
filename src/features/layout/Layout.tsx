@@ -1,8 +1,8 @@
 import { pagesPath } from '@/src/utils/$path'
 import { Box } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { Button } from './Button'
-import { Container } from './Container'
+import { Button } from '../ui/Button'
+import { Container } from '../ui/Container'
 
 type Props = {
   children: React.ReactNode

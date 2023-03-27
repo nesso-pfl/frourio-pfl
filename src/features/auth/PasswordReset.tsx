@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { Card, Container, Heading, Layout } from '../ui'
+import { Layout } from '../layout'
+import { Card, Container, Heading } from '../ui'
 import { PasswordResetForm } from './PasswordResetForm'
 import { useResetPassword } from './useResetPassword'
 

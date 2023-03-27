@@ -1,4 +1,5 @@
-import { Card, Container, Heading, Layout } from '~/features/ui'
+import { Card, Container, Heading } from '~/features/ui'
+import { Layout } from '~/features/layout'
 import { pagesPath } from '@/src/utils/$path'
 import Head from 'next/head'
 import { useCallback } from 'react'

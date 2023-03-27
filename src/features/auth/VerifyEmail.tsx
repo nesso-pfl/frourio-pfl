@@ -2,7 +2,7 @@ import { verifyEmail, VerifyEmailError, VerifyEmailErrorCode } from '@/src/lib/f
 import { Box, Center, Heading, Spinner } from '@chakra-ui/react'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
-import { Layout } from '../ui'
+import { Layout } from '../layout'
 
 type PageState =
   | {
