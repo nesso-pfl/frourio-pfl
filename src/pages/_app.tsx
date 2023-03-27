@@ -24,8 +24,12 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
       </Head>
       <SWRConfig
         value={{
-          revalidateOnMount: true,
+          errorRetryCount: 2,
+          errorRetryInterval: 500,
+          revalidateOnMount: false,
+          revalidateIfStale: false,
           revalidateOnFocus: false,
+          revalidateOnReconnect: false,
         }}
       >
         <ChakraProvider theme={chakraTheme}>{getLayout(<Component {...pageProps} />)}</ChakraProvider>

@@ -21,9 +21,6 @@ export const AuthCheck: React.FC<Props> = ({ children, requiredAuth }) => {
   const router = useRouter()
   const { data, error } = useAspidaSWR(apiClient.authed.account.me, {
     errorRetryCount: 0,
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
   })
 
   const isLoaded = data || error
