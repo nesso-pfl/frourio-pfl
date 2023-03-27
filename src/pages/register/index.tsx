@@ -2,7 +2,7 @@ import { Box, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { RegisterForm, useCreateAccount } from '~/features/auth'
 import { Card, Container, Heading } from '~/features/ui'
-import { Layout } from '~/features/layout'
+import { NotLoggedInLayout } from '~/features/layout'
 import { pagesPath } from '@/src/utils/$path'
 import Head from 'next/head'
 import { depend } from 'velona'
@@ -38,5 +38,5 @@ const Register = depend({ useCreateAccount }, ({ useCreateAccount }) => {
 const Page: typeof Register & { getLayout?: (page: React.ReactElement) => React.ReactNode } = Register
 export default Page
 Page.getLayout = (page: React.ReactElement) => {
-  return <Layout>{page}</Layout>
+  return <NotLoggedInLayout>{page}</NotLoggedInLayout>
 }

@@ -3,30 +3,38 @@ import { apiClient } from '~/utils/apiClient'
 import useAspidaSWR from '@aspida/swr'
 import { Center, Spinner } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
+import { UrlObject } from 'url'
+
+type AuthState = 'notLoggingIn' | 'loggingIn'
+const redirectPathMap: Record<AuthState, UrlObject> = {
+  notLoggingIn: pagesPath.$url(),
+  loggingIn: pagesPath.login.$url(),
+}
 
 type Props = {
+  requiredAuth?: AuthState
   children: React.ReactNode
 }
 
-export const AuthCheck: React.FC<Props> = ({ children }) => {
+export const AuthCheck: React.FC<Props> = ({ children, requiredAuth = 'loggingIn' }) => {
   const router = useRouter()
   const { data, error } = useAspidaSWR(apiClient.authed.account.me, {
-    onError: () => {
-      router.replace(pagesPath.login.$url())
-    },
+    errorRetryCount: 0,
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
   })
 
-  // SWR の data による re-rendering がやかましいため副作用が重複発生してしまう。その対策としての ref
-  const hasRedirected = useRef(false)
+  const isLoaded = data || error
+  const shouldRedirect = (requiredAuth === 'loggingIn' && error) || (requiredAuth === 'notLoggingIn' && data)
   useEffect(() => {
-    if (error) {
-      hasRedirected.current = true
-      router.replace(pagesPath.login.$url())
+    if (shouldRedirect) {
+      router.replace(redirectPathMap[requiredAuth])
     }
-  }, [router, error])
+  }, [shouldRedirect, router, requiredAuth])
 
-  return data ? (
+  return isLoaded && !shouldRedirect ? (
     <>{children}</>
   ) : (
     <Center w="100vw" h="100vh">

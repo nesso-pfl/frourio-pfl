@@ -2,7 +2,7 @@ import { verifyEmail, VerifyEmailError, VerifyEmailErrorCode } from '@/src/lib/f
 import { Box, Center, Heading, Spinner } from '@chakra-ui/react'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
-import { Layout } from '../layout'
+import { NotLoggedInLayout } from '../layout'
 
 type PageState =
   | {
@@ -60,7 +60,7 @@ export const VerifyEmail: React.FC<Props> = ({ code }) => {
       )
     case 'success':
       return (
-        <Layout>
+        <NotLoggedInLayout>
           <Head>
             <title>メールアドレス確認完了 | Frourio Pfl</title>
           </Head>
@@ -70,18 +70,18 @@ export const VerifyEmail: React.FC<Props> = ({ code }) => {
             </Heading>
             <Box as="p">ログインページからログインしてください。</Box>
           </Center>
-        </Layout>
+        </NotLoggedInLayout>
       )
     case 'error':
       return (
-        <Layout>
+        <NotLoggedInLayout>
           <Center flexDirection="column" pt="10vh">
             <Heading fontSize="xl" textAlign="center" mb="25px">
               メールアドレスの確認ができませんでした。
             </Heading>
             <Box as="p">{showError(pageState.data)}</Box>
           </Center>
-        </Layout>
+        </NotLoggedInLayout>
       )
   }
 }

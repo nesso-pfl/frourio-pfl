@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { Container, Heading } from '~/features/ui'
-import { Layout } from '~/features/layout'
+import { NotLoggedInLayout } from '~/features/layout'
 import Head from 'next/head'
 
 export default function Page() {
@@ -18,5 +18,5 @@ export default function Page() {
 }
 
 Page.getLayout = (page: React.ReactElement) => {
-  return <Layout>{page}</Layout>
+  return <NotLoggedInLayout>{page}</NotLoggedInLayout>
 }

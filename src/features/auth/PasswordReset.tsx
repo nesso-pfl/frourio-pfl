@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Layout } from '../layout'
+import { NotLoggedInLayout } from '../layout'
 import { Card, Container, Heading } from '../ui'
 import { PasswordResetForm } from './PasswordResetForm'
 import { useResetPassword } from './useResetPassword'
@@ -12,7 +12,7 @@ export const PasswordReset: React.FC<Props> = ({ code }) => {
   const { resetPassword } = useResetPassword({ code })
 
   return (
-    <Layout>
+    <NotLoggedInLayout>
       <Head>
         <title>パスワード再設定 | Frourio Pfl</title>
       </Head>
@@ -24,6 +24,6 @@ export const PasswordReset: React.FC<Props> = ({ code }) => {
           </Card.Body>
         </Card.Container>
       </Container>
-    </Layout>
+    </NotLoggedInLayout>
   )
 }

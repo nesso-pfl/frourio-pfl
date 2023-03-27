@@ -1,5 +1,4 @@
-import { AuthCheck } from '~/features/auth'
-import { Layout } from '~/features/layout'
+import { LoggedInLayout } from '~/features/layout'
 
 function Home() {
   return <>home</>
@@ -7,9 +6,5 @@ function Home() {
 
 export default Home
 Home.getLayout = (page: React.ReactElement) => {
-  return (
-    <AuthCheck>
-      <Layout>{page}</Layout>
-    </AuthCheck>
-  )
+  return <LoggedInLayout>{page}</LoggedInLayout>
 }

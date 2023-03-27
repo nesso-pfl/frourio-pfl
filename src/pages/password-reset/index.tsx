@@ -1,5 +1,5 @@
 import { Card, Container, Heading } from '~/features/ui'
-import { Layout } from '~/features/layout'
+import { NotLoggedInLayout } from '~/features/layout'
 import { pagesPath } from '@/src/utils/$path'
 import Head from 'next/head'
 import { useCallback } from 'react'
@@ -34,5 +34,5 @@ export default function Page() {
 }
 
 Page.getLayout = (page: React.ReactElement) => {
-  return <Layout>{page}</Layout>
+  return <NotLoggedInLayout>{page}</NotLoggedInLayout>
 }

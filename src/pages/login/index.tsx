@@ -4,7 +4,7 @@ import Head from 'next/head'
 import NextLink from 'next/link'
 import { LoginForm, useLogin } from '~/features/auth'
 import { Card, Container, Heading } from '~/features/ui'
-import { Layout } from '~/features/layout'
+import { NotLoggedInLayout } from '~/features/layout'
 
 function Login() {
   const { login } = useLogin()
@@ -44,5 +44,5 @@ function Login() {
 
 export default Login
 Login.getLayout = (page: React.ReactElement) => {
-  return <Layout>{page}</Layout>
+  return <NotLoggedInLayout>{page}</NotLoggedInLayout>
 }

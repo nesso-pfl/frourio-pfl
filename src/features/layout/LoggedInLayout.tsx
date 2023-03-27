@@ -12,11 +12,9 @@ type Props = {
 
 export const LoggedInLayout: React.FC<Props> = ({ children }) => {
   const router = useRouter()
-  const logout = () => {
-    // TODO: ログアウト処理
-    // await apiClient.public.logout.$post();
-    console.log(apiClient)
-    router.push(pagesPath.login.$url())
+  const logout = async () => {
+    await apiClient.public.logout.$post()
+    await router.push(pagesPath.login.$url())
   }
 
   return (
