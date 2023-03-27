@@ -2,10 +2,9 @@ import { cityCategories, CreateCity, createCitySchema } from '@/server/types/cit
 import { VStack } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
-import { Button, Datepicker, Form, Input, RadioGroup } from '../ui'
+import { Button, Datepicker, Form, Input, MultiSelect, RadioGroup } from '../ui'
 import { SubmitError } from '../form'
 import { showCategory } from './showCategory'
-import ReactSelect from 'react-select/creatable'
 
 type Props = {
   defaultValues?: Partial<CreateCity>
@@ -76,12 +75,7 @@ export const CityForm: React.FC<Props> = ({ defaultValues, isEdit, onSubmit }) =
             control={control}
             name="features"
             render={({ field }) => (
-              <ReactSelect
-                placeholder="選択してください"
-                noOptionsMessage={() => <>検索結果はありません</>}
-                isMulti
-                isClearable
-                isSearchable
+              <MultiSelect
                 options={['広い', '狭い'].map((feature) => ({ value: feature, label: feature }))}
                 formatCreateLabel={(feature) => `${feature} を追加`}
                 defaultValue={defaultValues?.features?.map((feature) => ({ value: feature, label: feature }))}
