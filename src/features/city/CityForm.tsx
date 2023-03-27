@@ -63,11 +63,8 @@ export const CityForm: React.FC<Props> = ({ defaultValues, isEdit, onSubmit }) =
             name="startedAt"
             render={({ field }) => (
               <Datepicker
-                placeholderText="年/月/日"
-                dateFormat="yyyy/MM/dd"
                 selected={field.value ? new Date(field.value) : undefined}
                 onChange={(date) => field.onChange(date ? date.toISOString() : undefined)}
-                customInput={<Input />}
               />
             )}
           />
