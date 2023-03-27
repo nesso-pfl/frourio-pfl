@@ -1,9 +1,9 @@
 import { render } from '@/test/testUtils'
-import Register from '@/src/pages/register'
-import { submitForm, validInput } from '@/src/features/account/RegisterForm.test-input'
+import Register from '~/pages/register'
+import { submitForm, validInput } from '~/features/auth/RegisterForm.test-input'
 import mockRouter from 'next-router-mock'
-import { pagesPath } from '@/src/utils/$path'
-import { CreateUserError } from '@/src/lib/firebase'
+import { pagesPath } from '~/utils/$path'
+import { CreateUserError } from '~/lib/firebase'
 
 describe('/register', () => {
   test('アカウントが登録できる', async () => {

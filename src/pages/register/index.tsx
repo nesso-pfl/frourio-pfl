@@ -1,6 +1,6 @@
 import { Box, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { RegisterForm, useCreateAccount } from '~/features/account'
+import { RegisterForm, useCreateAccount } from '~/features/auth'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 import { pagesPath } from '@/src/utils/$path'
 import Head from 'next/head'

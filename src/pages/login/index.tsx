@@ -2,7 +2,7 @@ import { pagesPath } from '@/src/utils/$path'
 import { Box, Link } from '@chakra-ui/react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import { LoginForm, useLogin } from '~/features/account'
+import { LoginForm, useLogin } from '~/features/auth'
 import { Card, Container, Heading, Layout } from '~/features/ui'
 
 function Login() {
