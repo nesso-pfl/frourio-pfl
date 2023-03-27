@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { pagesPath } from '~/utils/$path'
-import { AuthCheck } from '~/features/account'
-import { Layout, Breadcrumb, Heading, Container, Card } from '~/features/ui'
+import { Breadcrumb, Heading, Container, Card } from '~/features/ui'
+import { AuthCheck } from '~/features/auth'
+import { Layout } from '~/features/layout'
 import { CityForm, useCreateCity } from '@/src/features/city'
 
 export default function Page() {
