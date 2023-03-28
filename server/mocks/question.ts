@@ -33,21 +33,25 @@ export const mockQuestions = (): Question[] => [
 
 export const mockAnswers = (): Answer[] => [
   {
+    id: 1,
     questionId: 1,
     answerType: 'yesno',
     answerChoice: true,
   },
   {
+    id: 2,
     questionId: 2,
     answerType: 'checkbox',
     answerChoice: [1, 2],
   },
   {
+    id: 3,
     questionId: 3,
     answerType: 'yesno',
     answerChoice: true,
   },
   {
+    id: 4,
     questionId: 4,
     answerType: 'yesno',
     answerChoice: true,
