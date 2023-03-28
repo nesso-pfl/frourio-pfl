@@ -22,3 +22,4 @@ export type Answer<T extends AnswerType = AnswerType> = {
   answerType: T
   answerChoice: AnswerChoice<T>
 }
+export type PostAnswer = Pick<Answer, 'questionId' | 'answerType' | 'answerChoice'>

@@ -1,8 +1,8 @@
-import { Answer, QuestionId, Request, Response } from '$/types'
+import { PostAnswer, QuestionId, Request, Response } from '$/types'
 
 export type Methods = {
   post: {
-    reqBody: Request<Answer>
+    reqBody: Request<PostAnswer>
     resBody: Response<{ nextQuestionId: QuestionId | undefined }>
   }
 }
