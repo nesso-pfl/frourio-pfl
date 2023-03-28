@@ -9,7 +9,7 @@ export const mockQuestions = (): Question[] => [
   },
   {
     id: 2,
-    content: 'お持ちの証明書に関連して、以下のうち該当するものをすべて選択し、「次へ」を押してください。',
+    content: 'お持ちの証明書に関連して、以下のうち該当するものをすべて選択し、\n「次へ」を押してください。',
     answerType: 'checkbox',
     answers: [
       { label: 'マイナンバーカードを持っている方がいる', value: 1 },
