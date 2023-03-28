@@ -13,6 +13,7 @@
     "generate:frourio": "frourio",
     "generate:prisma": "prisma generate",
     "migrate:dev": "prisma migrate dev",
+    "migrate:test-local": "dotenv -e ./prisma/.env.test.local prisma migrate reset --preview-feature --force",
     "migrate:dev:createonly": "prisma migrate dev --create-only",
     "migrate:reset": "prisma migrate reset",
     "migrate:deploy": "prisma migrate deploy",

@@ -7,3 +7,10 @@ services:
     volumes:
       - '/var/lib/posgresql/data'
       - '/var/run/posgresql'
+  testdb:
+    image: postgres:15-alpine
+    ports:
+      - '2223:5432'
+    env_file: ./server/prisma/.env.test.local
+    volumes:
+      - '/var/run/posgresql'

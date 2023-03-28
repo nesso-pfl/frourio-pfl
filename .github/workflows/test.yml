@@ -10,7 +10,7 @@ jobs:
       postgres:
         image: postgres
         ports:
-          - 2222:5432
+          - 2223:5432
         env:
           POSTGRES_PASSWORD: password
           POSTGRES_USER: psqluser
@@ -47,6 +47,7 @@ jobs:
       - run: yarn typecheck
       - run: |
           yarn migrate:dev
-          yarn test
+          yarn test:unit
+          yarn test:integration
         env:
           API_JWT_SECRET: test_secret
