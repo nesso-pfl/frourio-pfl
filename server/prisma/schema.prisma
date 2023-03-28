@@ -13,3 +13,90 @@ model FirebaseUser {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+// 質問のカテゴリ
+enum QuestionSetCategory {
+  moveIn
+}
+
+enum QuestionType {
+  yesNo
+  checkbox
+}
+
+model QuestionSet {
+  id        Int                 @id @default(autoincrement())
+  category  QuestionSetCategory
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  Question  Question[]
+}
+
+model Question {
+  id               Int                @id @default(autoincrement())
+  content          String
+  questionSet      QuestionSet        @relation(fields: [questionSetId], references: [id])
+  questionSetId    Int
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  YesNoQuestion    YesNoQuestion[]
+  CheckboxQuestion CheckboxQuestion[]
+  Answer           Answer[]
+  CheckboxAnswer   CheckboxAnswer[]
+}
+
+model YesNoQuestion {
+  id         Int      @id @default(autoincrement())
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model CheckboxQuestion {
+  id                     Int                      @id @default(autoincrement())
+  question               Question                 @relation(fields: [questionId], references: [id])
+  questionId             Int
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  CheckboxQuestionChoice CheckboxQuestionChoice[]
+}
+
+model CheckboxQuestionChoice {
+  id         Int              @id @default(autoincrement())
+  label      String
+  question   CheckboxQuestion @relation(fields: [questionId], references: [id])
+  questionId Int
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@unique([label, questionId])
+}
+
+model Answer {
+  id             Int              @id @default(autoincrement())
+  question       Question         @relation(fields: [questionId], references: [id])
+  questionId     Int
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  YesNoAnswer    YesNoAnswer[]
+  CheckboxAnswer CheckboxAnswer[]
+}
+
+model YesNoAnswer {
+  id        Int      @id @default(autoincrement())
+  answer    Answer   @relation(fields: [answerId], references: [id])
+  answerId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CheckboxAnswer {
+  id         Int       @id @default(autoincrement())
+  answer     Answer    @relation(fields: [answerId], references: [id])
+  answerId   Int
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId Int?
+}
