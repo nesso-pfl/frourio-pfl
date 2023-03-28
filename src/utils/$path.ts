@@ -14,6 +14,11 @@ export const pagesPath = {
     },
     $url: (url?: { hash?: string }) => ({ pathname: '/password-reset' as const, hash: url?.hash })
   },
+  "question": {
+    "move_in": {
+      $url: (url?: { hash?: string }) => ({ pathname: '/question/move-in' as const, hash: url?.hash })
+    }
+  },
   "register": {
     "complete": {
       $url: (url?: { hash?: string }) => ({ pathname: '/register/complete' as const, hash: url?.hash })
