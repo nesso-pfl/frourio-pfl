@@ -49,5 +49,3 @@ jobs:
           yarn migrate:dev
           yarn test:unit
           yarn test:integration
-        env:
-          API_JWT_SECRET: test_secret
