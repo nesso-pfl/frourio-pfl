@@ -4,6 +4,7 @@ import '@testing-library/jest-dom'
 
 dotenv.config({ path: '.env' })
 jest.mock('next/router', () => require('next-router-mock'))
+jest.mock('~/envValues')
 
 beforeAll(() => server.listen())
 beforeEach(() => {
