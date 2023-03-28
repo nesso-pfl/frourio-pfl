@@ -1,4 +1,4 @@
-import { AnswerResult, Question } from '$/types'
+import { Answer, Question } from '$/types'
 
 export const mockQuestions = (): Question[] => [
   {
@@ -6,7 +6,6 @@ export const mockQuestions = (): Question[] => [
     content: '国外から転入しましたか？',
     answerType: 'yesno',
     answers: [true, false],
-    nextQuestionId: 2,
   },
   {
     id: 2,
@@ -17,15 +16,12 @@ export const mockQuestions = (): Question[] => [
       { label: '住民基本台帳カードを持っている方がいる', value: 2 },
       { label: '運転免許証を持っている方がいる', value: 3 },
     ],
-    nextQuestionId: 3,
   },
   {
     id: 3,
     content: 'マイナンバーカードを持っている人だけの質問',
     answerType: 'yesno',
     answers: [true, false],
-    enabled: [2, [1]],
-    nextQuestionId: 4,
   },
   {
     id: 4,
@@ -35,25 +31,25 @@ export const mockQuestions = (): Question[] => [
   },
 ]
 
-export const mockAnswerResults = (): AnswerResult[] => [
+export const mockAnswers = (): Answer[] => [
   {
     questionId: 1,
     answerType: 'yesno',
-    answer: true,
+    answerChoice: true,
   },
   {
     questionId: 2,
     answerType: 'checkbox',
-    answer: [1, 2],
+    answerChoice: [1, 2],
   },
   {
     questionId: 3,
     answerType: 'yesno',
-    answer: true,
+    answerChoice: true,
   },
   {
     questionId: 4,
     answerType: 'yesno',
-    answer: true,
+    answerChoice: true,
   },
 ]
