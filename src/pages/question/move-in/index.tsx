@@ -1,4 +1,4 @@
-import { Breadcrumb, Button, Card, Container, Heading } from '@/src/features/ui'
+import { Breadcrumb, Button, Card, Container, Heading, NextLink } from '@/src/features/ui'
 import { pagesPath } from '@/src/utils/$path'
 import { Box } from '@chakra-ui/react'
 import { LoggedInLayout } from '~/features/layout'
@@ -21,9 +21,11 @@ function Page() {
             <Box as="p" mb={16}>
               市外または市内他区から引越しをする際に名古屋市で必要となる手続きを洗い出します。
             </Box>
-            <Button size="lg" w="50%">
-              回答を始める
-            </Button>
+            <NextLink href={pagesPath.question.move_in._id(1).$url()} w="50%">
+              <Button as="div" size="lg" w="100%">
+                回答を始める
+              </Button>
+            </NextLink>
           </Card.Body>
         </Card.Container>
       </Container>
