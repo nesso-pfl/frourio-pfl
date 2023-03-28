@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run generate && npm run migrate:dev && run-p dev:*",
-    "dev:server": "node-dev --respawn index.js",
+    "dev:server": "node-dev --experimental-loader --respawn index.js",
     "dev:build": "node ./scripts/build.dev.js",
     "dev:frourio": "frourio --watch",
     "dev:prisma": "prisma generate --watch",
