@@ -19,6 +19,9 @@ export const pagesPath = {
       _id: (id: string | number) => ({
         $url: (url?: { hash?: string }) => ({ pathname: '/question/move-in/[id]' as const, query: { id }, hash: url?.hash })
       }),
+      "result": {
+        $url: (url?: { hash?: string }) => ({ pathname: '/question/move-in/result' as const, hash: url?.hash })
+      },
       $url: (url?: { hash?: string }) => ({ pathname: '/question/move-in' as const, hash: url?.hash })
     }
   },
