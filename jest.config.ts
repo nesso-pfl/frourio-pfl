@@ -5,7 +5,7 @@ import { compilerOptions } from './tsconfig.json'
 const config: { projects: Config.InitialOptions[] } = {
   projects: [
     {
-      setupFilesAfterEnv: ['<rootDir>/test/setupTest.ts'],
+      setupFilesAfterEnv: ['<rootDir>/test/setupClientTest.ts'],
       testPathIgnorePatterns: ['<rootDir>/server', '/node_modules/'],
       testEnvironment: 'jest-environment-jsdom',
       transform: {
@@ -22,7 +22,7 @@ const config: { projects: Config.InitialOptions[] } = {
     },
     {
       preset: 'ts-jest',
-      setupFilesAfterEnv: ['<rootDir>/test/setupTestForServer.ts'],
+      setupFilesAfterEnv: ['<rootDir>/test/setupServerTest.ts'],
       testEnvironment: 'node',
       testMatch: ['<rootDir>/server/**/*.test.ts'],
       moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
