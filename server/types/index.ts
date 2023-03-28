@@ -1,4 +1,4 @@
-export { Question, Answer, AnswerResult } from './question'
+export { Question, QuestionId, Answer } from './question'
 export { CreateUserError, createUserErrorCodes } from './user'
 export type { User, CreateUser } from './user'
 export { createAccountErrorCodes, CreateAccountError } from './account'
