@@ -1,9 +1,5 @@
-import { pagesPath } from '@/src/utils/$path'
-import { apiClient } from '@/src/utils/apiClient'
-import useAspidaSWR from '@aspida/swr'
 import { Box } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { AuthCheck } from '../auth'
+import { AuthCheck, useLogout } from '../auth'
 import { Button } from '../ui/Button'
 import { Container } from '../ui/Container'
 
@@ -12,13 +8,7 @@ type Props = {
 }
 
 export const LoggedInLayout: React.FC<Props> = ({ children }) => {
-  const { mutate } = useAspidaSWR(apiClient.authed.account.me)
-  const router = useRouter()
-  const logout = async () => {
-    await apiClient.public.logout.$post()
-    await mutate(undefined, { revalidate: true })
-    await router.push(pagesPath.login.$url())
-  }
+  const { logout } = useLogout()
 
   return (
     <AuthCheck requiredAuth="loggingIn">
