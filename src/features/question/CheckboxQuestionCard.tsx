@@ -1,4 +1,4 @@
-import { Answer, Question } from '$/types'
+import { AnswerChoice, Question } from '$/types'
 import { Box, Flex, VStack } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
@@ -12,7 +12,7 @@ type Form = z.infer<typeof formSchema>
 
 type Props = {
   question: Question<'checkbox'>
-  onSubmit: (answer: Answer<'checkbox'>) => Promise<unknown>
+  onSubmit: (answer: AnswerChoice<'checkbox'>) => Promise<unknown>
 }
 
 export const CheckboxQuestionCard: React.FC<Props> = ({ question, onSubmit }) => {

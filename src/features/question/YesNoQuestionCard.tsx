@@ -1,10 +1,10 @@
-import { Answer, Question } from '$/types'
+import { AnswerChoice, Question } from '$/types'
 import { Box, Flex } from '@chakra-ui/react'
 import { Button, Card, Container } from '../ui'
 
 type Props = {
   question: Question<'yesno'>
-  onSubmit: (answer: Answer<'yesno'>) => Promise<unknown>
+  onSubmit: (answer: AnswerChoice<'yesno'>) => Promise<unknown>
 }
 
 export const YesNoQuestionCard: React.FC<Props> = ({ question, onSubmit }) => {

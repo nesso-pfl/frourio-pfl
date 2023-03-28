@@ -1,9 +1,10 @@
-import { mockQuestions } from '@/server/mocks'
-import { Answer } from '@/server/types/question'
+import { AnswerChoice, Question } from '@/server/types/question'
 import { CheckboxQuestionCard } from '@/src/features/question'
 import { YesNoQuestionCard } from '@/src/features/question/YesNoQuestionCard'
 import { Breadcrumb } from '@/src/features/ui'
 import { pagesPath } from '@/src/utils/$path'
+import { apiClient } from '@/src/utils/apiClient'
+import useAspidaSWR from '@aspida/swr'
 import { Box, Center, Spinner } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { LoggedInLayout } from '~/features/layout'
@@ -11,9 +12,23 @@ import { LoggedInLayout } from '~/features/layout'
 function Page() {
   const router = useRouter()
   const questionId = router.query.id ? +router.query.id : undefined
-  const question = mockQuestions().find((question) => question.id === questionId)
-  const sendAnswer = async (value: Answer) => {
-    console.log(value)
+  const { data: question } = useAspidaSWR(apiClient.authed.question._questionId(questionId as number), {
+    key: questionId ? apiClient.authed.question._questionId(questionId).$path() : null,
+  })
+  const sendAnswer = async (value: AnswerChoice) => {
+    if (!question) throw new Error('question should be defined')
+    const { nextQuestionId } = await apiClient.authed.question.$post({
+      body: {
+        questionId: question.id,
+        answerType: question.answerType,
+        answerChoice: value,
+      },
+    })
+    if (nextQuestionId) {
+      router.push(pagesPath.question.move_in._id(nextQuestionId).$url())
+    } else {
+      // 結果がめんへ飛ぶ
+    }
   }
 
   return question ? (
@@ -25,9 +40,9 @@ function Page() {
         ]}
       />
       {question.answerType === 'yesno' ? (
-        <YesNoQuestionCard question={question} onSubmit={sendAnswer} />
+        <YesNoQuestionCard question={question as Question<'yesno'>} onSubmit={sendAnswer} />
       ) : (
-        <CheckboxQuestionCard question={question} onSubmit={sendAnswer} />
+        <CheckboxQuestionCard question={question as Question<'checkbox'>} onSubmit={sendAnswer} />
       )}
     </Box>
   ) : (
